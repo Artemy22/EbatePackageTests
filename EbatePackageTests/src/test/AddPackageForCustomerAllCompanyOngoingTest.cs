@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace EbatePackageTests
 {
-    public class AddPackageTest
+    public class AddPackageForCustomerAllCompanyOngoingTest
     {
         private IWebDriver driver;
         private readonly Credentials creds = new Credentials();
@@ -24,7 +24,7 @@ namespace EbatePackageTests
         }
 
         [Test]
-        public void AddPackageForCustomerAllCompaniesOngoingTest()
+        public void AddPackage()
         {
             var loginPage = new LoginTabPageObject(driver);
             var loginTenantnPage = new LoginTenantTabPageObject(driver);
@@ -50,7 +50,7 @@ namespace EbatePackageTests
             }
 
             addPackagePopup.ClickDescription();
-            string description = "Selenium Package For Customer for All Companies Ongoing in range" + int0to9*int0to9;
+            string description = "Selenium Package For Customer for All Companies Ongoing - " + int0to9*int0to9;
             actions.SendKeys(description).Perform();
 
             addPackagePopup.ClickBudget();
