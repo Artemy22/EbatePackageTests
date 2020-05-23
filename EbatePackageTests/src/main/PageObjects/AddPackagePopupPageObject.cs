@@ -13,7 +13,7 @@ namespace EbatePackageTests
         public readonly By _SupplierType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[2]");
         public readonly By _DistributorType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[3]");
         public readonly By _ChannelType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[4]");
-        public readonly By _SingleCompany = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[2]/div/div/fieldset/div[1]/label[1]");
+        public readonly By _SingleCompany = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[2]/div/div/fieldset/div[1]/label[1]]");
         public readonly By _SingleCompanyAccountTypeDropDown = By.XPath("//*[@id=\"companySelectionAccountType\"]");
         public readonly By _AllCompanies = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[2]/div/div/fieldset/div[1]/label[2]");
         public readonly By _periodInput = By.XPath("//*[@id=\"period\"]");
@@ -56,7 +56,7 @@ namespace EbatePackageTests
             _webDriver.FindElement(_ChannelType).Click();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickSingleCompany()
+        public MainMenuPageObject ClickCompanySelection()
         {
             _webDriver.FindElement(_SingleCompany).Click();
             return new MainMenuPageObject(_webDriver);
