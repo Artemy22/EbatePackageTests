@@ -24,29 +24,29 @@ namespace EbatePackageTests
             _webDriver = webDriver;
         }
 
-        public LoginTenantTabPageObject SetBudget()
+        public AddAgreementPopupPageObject SetBudget()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_budget).Click();
             actions.SendKeys("1" + Keys.Enter).Perform();
-            return new LoginTenantTabPageObject(_webDriver);
+            return new AddAgreementPopupPageObject(_webDriver);
         }
-        public LoginTenantTabPageObject SetTarget()
+        public AddAgreementPopupPageObject SetTarget()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_target).Click();
             actions.SendKeys("1" + Keys.Enter).Perform();
-            return new LoginTenantTabPageObject(_webDriver);
+            return new AddAgreementPopupPageObject(_webDriver);
         }
-        public LoginTenantTabPageObject ClickSaveButton()
+        public AddAgreementPopupPageObject ClickSaveButton()
         {
             _webDriver.FindElement(_saveButton).Click();
-            return new LoginTenantTabPageObject(_webDriver);
+            return new AddAgreementPopupPageObject(_webDriver);
         }
-        public LoginTenantTabPageObject ClickCancelButton()
+        public AddAgreementPopupPageObject ClickCancelButton()
         {
             _webDriver.FindElement(_cancelButton).Click();
-            return new LoginTenantTabPageObject(_webDriver);
+            return new AddAgreementPopupPageObject(_webDriver);
         }
 
 
