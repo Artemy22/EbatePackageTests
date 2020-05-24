@@ -40,172 +40,185 @@ namespace EbatePackageTests
             _webDriver = webDriver;
         }
 
-        public MainMenuPageObject ClickCustomerType()
+        public AddPackagePopupPageObject ClickCustomerType()
         {
             _webDriver.FindElement(_CustomerType).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickSupplierType()
+        public AddPackagePopupPageObject ClickSupplierType()
         {
             _webDriver.FindElement(_SupplierType).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickDistributorType()
+        public AddPackagePopupPageObject ClickDistributorType()
         {
             _webDriver.FindElement(_DistributorType).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickChannelType()
+        public AddPackagePopupPageObject ClickChannelType()
         {
             _webDriver.FindElement(_ChannelType).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickCompanySelection()
+        public AddPackagePopupPageObject ClickCompanySelection()
         {
             _webDriver.FindElement(_SingleCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickSingleCompanyAccountTypeDropDown()
+        public AddPackagePopupPageObject ClickSingleCompanyAccountTypeDropDown()
         {
             _webDriver.FindElement(_SingleCompanyAccountTypeDropDown).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickAllCompanies()
+        public AddPackagePopupPageObject ClickAllCompanies()
         {
             _webDriver.FindElement(_AllCompanies).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetPeriodOngoing()
+        public AddPackagePopupPageObject SetPeriodOngoing()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_periodInput).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetStartDate()
+
+        public string StartDateGenerator()
         {
-            Actions actions = new Actions(_webDriver);
             int int0to9 = rnd.Next(0, 9);
-            _webDriver.FindElement(_startDate).Click();
-            actions.SendKeys(Keys.Home).Perform();
-            actions.SendKeys("0101200"+int0to9).Perform();
-            return new MainMenuPageObject(_webDriver);
+            string startDate = "0101200" + int0to9;
+            return startDate;
         }
-        public MainMenuPageObject SetEndDate()
+
+        public string EndDateGenerator()
         {
-            Actions actions = new Actions(_webDriver);
             int intFirst = rnd.Next(1, 9);
             int intSecond = rnd.Next(0, 9);
+            string endDate = "010120" + intFirst + intSecond;
+            return endDate;
+        }
+
+        public AddPackagePopupPageObject SetStartDate()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_startDate).Click();
+            actions.SendKeys(Keys.Home).Perform();
+            actions.SendKeys(StartDateGenerator()).Perform();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+        public AddPackagePopupPageObject SetEndDate()
+        {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_endDate).Click();
             actions.SendKeys(Keys.Home).Perform();
-            actions.SendKeys("010120" + intFirst+intSecond).Perform();
-            return new MainMenuPageObject(_webDriver);
+            actions.SendKeys(EndDateGenerator()).Perform();
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetDescription(string description)
+        public AddPackagePopupPageObject SetDescription(string description)
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_description).Click();
             actions.SendKeys(description).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetBudget()
+        public AddPackagePopupPageObject SetBudget()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_budget).Click();
             actions.SendKeys("1").Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetTarget()
+        public AddPackagePopupPageObject SetTarget()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_target).Click();
             actions.SendKeys("1").Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickComments()
+        public AddPackagePopupPageObject ClickComments()
         {
             _webDriver.FindElement(_comments).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickSaveBtn()
+        public AddPackagePopupPageObject ClickSaveBtn()
         {
             _webDriver.FindElement(_saveBtn).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickCancelBtn()
+        public AddPackagePopupPageObject ClickCancelBtn()
         {
             _webDriver.FindElement(_cancelBtn).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
 
-        public MainMenuPageObject SetAccountTypeTradingGroup()
+        public AddPackagePopupPageObject SetAccountTypeTradingGroup()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.Enter).Perform(); 
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetAccountTypeParentAccount()
+        public AddPackagePopupPageObject SetAccountTypeParentAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetAccountTypeInvoiceAccount()
+        public AddPackagePopupPageObject SetAccountTypeInvoiceAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetAccountTypeDeliveryAccount()
+        public AddPackagePopupPageObject SetAccountTypeDeliveryAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetAccountTypeDistributor()
+        public AddPackagePopupPageObject SetAccountTypeDistributor()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetAccountTypeLandlord()
+        public AddPackagePopupPageObject SetAccountTypeLandlord()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
         
-        public MainMenuPageObject SetAccountTypeMerchantDistribution()
+        public AddPackagePopupPageObject SetAccountTypeMerchantDistribution()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
         
-        public MainMenuPageObject SetAccountTypeManufacturer()
+        public AddPackagePopupPageObject SetAccountTypeManufacturer()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
         
-        public MainMenuPageObject SetAccountTypeContractor()
+        public AddPackagePopupPageObject SetAccountTypeContractor()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
             actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
 
-        public MainMenuPageObject SetTradingGroupCompany()
+        public AddPackagePopupPageObject SetTradingGroupCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -213,10 +226,10 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
 
-        public MainMenuPageObject SetParentAccountCompany()
+        public AddPackagePopupPageObject SetParentAccountCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -224,9 +237,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetInvoiceAccountCompany()
+        public AddPackagePopupPageObject SetInvoiceAccountCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -234,9 +247,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetDeliveryAccountCompany()
+        public AddPackagePopupPageObject SetDeliveryAccountCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -244,9 +257,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetDistributorCompany()
+        public AddPackagePopupPageObject SetDistributorCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -254,9 +267,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetLandlordCompany()
+        public AddPackagePopupPageObject SetLandlordCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -264,9 +277,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetMerchantDistributionCompany()
+        public AddPackagePopupPageObject SetMerchantDistributionCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -274,9 +287,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetManufacturerCompany()
+        public AddPackagePopupPageObject SetManufacturerCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -284,9 +297,9 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
-        public MainMenuPageObject SetContractorCompany()
+        public AddPackagePopupPageObject SetContractorCompany()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
@@ -294,13 +307,13 @@ namespace EbatePackageTests
             Thread.Sleep(500);
             actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
 
-        public MainMenuPageObject getActualResult()
+        public AddPackagePopupPageObject getActualResult()
         {
             _webDriver.FindElement(_actualResult);
-            return new MainMenuPageObject(_webDriver);
+            return new AddPackagePopupPageObject(_webDriver);
         }
     }
 }

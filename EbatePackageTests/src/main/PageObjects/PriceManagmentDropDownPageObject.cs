@@ -20,25 +20,25 @@ namespace EbatePackageTests
             _webDriver = webDriver;
         }
 
-        public MainMenuPageObject ClickPackages()
+        public PriceManagmentDropDownPageObject ClickPackages()
         {
             _webDriver.FindElement(_packages).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PriceManagmentDropDownPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickAgreements()
+        public PriceManagmentDropDownPageObject ClickAgreements()
         {
             _webDriver.FindElement(_agreements).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PriceManagmentDropDownPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickApprovals()
+        public PriceManagmentDropDownPageObject ClickApprovals()
         {
             _webDriver.FindElement(_approvals).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PriceManagmentDropDownPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickCalcEngineStatus()
+        public PriceManagmentDropDownPageObject ClickCalcEngineStatus()
         {
             _webDriver.FindElement(_calcEngineStatus).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PriceManagmentDropDownPageObject(_webDriver);
         }
     }
 }

@@ -24,50 +24,50 @@ namespace EbatePackageTests
             _webDriver = webDriver;
         }
 
-        public MainMenuPageObject ClickBreadcrumbsHomeBtn()
+        public PackagesScreenPageObject ClickBreadcrumbsHomeBtn()
         {
             _webDriver.FindElement(_breadcrumbsHomeBtn).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickAddPackageBtn()
+        public PackagesScreenPageObject ClickAddPackageBtn()
         {
             _webDriver.FindElement(_addPackageBtn).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickOrderById()
+        public PackagesScreenPageObject ClickOrderById()
         {
             _webDriver.FindElement(_orderById).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject SelectFirstRow()
+        public PackagesScreenPageObject SelectFirstRow()
         {
             _webDriver.FindElement(_firstRow).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickActionEditButton()
+        public PackagesScreenPageObject ClickActionEditButton()
         {
             _webDriver.FindElement(_actionEditButton).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickActionViewButton()
+        public PackagesScreenPageObject ClickActionViewButton()
         {
             _webDriver.FindElement(_actionViewButton).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickActionCopyButton()
+        public PackagesScreenPageObject ClickActionCopyButton()
         {
             _webDriver.FindElement(_actionCopyButton).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickActionDeleteButton()
+        public PackagesScreenPageObject ClickActionDeleteButton()
         {
             _webDriver.FindElement(_actionDeleteButton).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickSearchInput()
+        public PackagesScreenPageObject ClickSearchInput()
         {
             _webDriver.FindElement(_searchInput).Click();
-            return new MainMenuPageObject(_webDriver);
+            return new PackagesScreenPageObject(_webDriver);
         }
     }
 }
