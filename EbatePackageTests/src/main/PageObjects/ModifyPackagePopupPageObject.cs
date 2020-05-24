@@ -9,7 +9,6 @@ namespace EbatePackageTests
     class ModifyPackagePopupPageObject
     {
         private IWebDriver _webDriver;
-        readonly Random rnd = new Random();
 
         public readonly By _periodDropDown = By.XPath("//*[@id=\"period\"]");
         public readonly By _startDate = By.XPath("//*[@id=\"periodStart\"]");
@@ -48,6 +47,30 @@ namespace EbatePackageTests
             _webDriver.FindElement(_descriptionInput).Click();
             actions.SendKeys(description).Perform();
             return new ModifyPackagePopupPageObject(_webDriver);
-        }        
+        }
+        public ModifyPackagePopupPageObject SetBudget(string budget)
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_budgetInput).Click();
+            actions.SendKeys(budget + Keys.Enter).Perform();
+            return new ModifyPackagePopupPageObject(_webDriver);
+        }
+        public ModifyPackagePopupPageObject SetTarget(string target)
+        {
+            Actions actions = new Actions(_webDriver); 
+            _webDriver.FindElement(_targetInput).Click();
+            actions.SendKeys(target + Keys.Enter).Perform();
+            return new ModifyPackagePopupPageObject(_webDriver);
+        }
+        public ModifyPackagePopupPageObject ClickSaveButton()
+        {
+            _webDriver.FindElement(_saveBtn).Click();
+            return new ModifyPackagePopupPageObject(_webDriver);
+        }
+        public ModifyPackagePopupPageObject ClickCancelButton()
+        {
+            _webDriver.FindElement(_cancelBtn).Click();
+            return new ModifyPackagePopupPageObject(_webDriver);
+        }
     }
 }
