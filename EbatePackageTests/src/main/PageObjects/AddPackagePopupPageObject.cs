@@ -1,13 +1,17 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace EbatePackageTests
 {
     class AddPackagePopupPageObject
     {
+        
         private IWebDriver _webDriver;
+        readonly Random rnd = new Random();
 
         public readonly By _CustomerType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[1]");
         public readonly By _SupplierType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[2]");
@@ -71,34 +75,52 @@ namespace EbatePackageTests
             _webDriver.FindElement(_AllCompanies).Click();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickPeriodInput()
+        public MainMenuPageObject SetkPeriodOngoing()
         {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_periodInput).Click();
+            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown).Perform();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickStartDate()
+        public MainMenuPageObject SetStartDate()
         {
+            Actions actions = new Actions(_webDriver);
+            int int0to9 = rnd.Next(0, 9);
             _webDriver.FindElement(_startDate).Click();
+            actions.SendKeys(Keys.Home).Perform();
+            actions.SendKeys("0101200"+int0to9).Perform();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickEndDate()
+        public MainMenuPageObject SetEndDate()
         {
+            Actions actions = new Actions(_webDriver);
+            int intFirst = rnd.Next(1, 9);
+            int intSecond = rnd.Next(0, 9);
+
             _webDriver.FindElement(_endDate).Click();
+            actions.SendKeys(Keys.Home).Perform();
+            actions.SendKeys("010120" + intFirst+intSecond).Perform();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickDescription()
+        public MainMenuPageObject SetDescription(string description)
         {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_description).Click();
+            actions.SendKeys(description).Perform();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickBudget()
+        public MainMenuPageObject SetBudget()
         {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_budget).Click();
+            actions.SendKeys("1").Perform();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickTarget()
+        public MainMenuPageObject SetTarget()
         {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_target).Click();
+            actions.SendKeys("1").Perform();
             return new MainMenuPageObject(_webDriver);
         }
         public MainMenuPageObject ClickComments()
@@ -116,21 +138,45 @@ namespace EbatePackageTests
             _webDriver.FindElement(_cancelBtn).Click();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickAccountTypeDropDown()
+
+        public MainMenuPageObject SetAccountTypeTradingGroup()
         {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
+            actions.SendKeys(Keys.Enter).Perform(); 
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject ClickCompanyNameDropDown()
+        public MainMenuPageObject SetAccountTypeParentAccount()
         {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_accountTypeDropDown).Click();
+            actions.SendKeys(Keys.Enter + Keys.ArrowDown).Perform();
+            return new MainMenuPageObject(_webDriver);
+        }
+
+
+        public MainMenuPageObject SetTradingGroupCompany()
+        {
+            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject SetChosenCompany()
-        {
+            actions.SendKeys("qa").Perform();
+            Thread.Sleep(500);
+            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new MainMenuPageObject(_webDriver);
         }
+
+        public MainMenuPageObject SetParentAccountCompany()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_companyNameDropDown).Click();
+            actions.SendKeys("pa").Perform();
+            Thread.Sleep(500);
+            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(_setChosenCompany).Click();
+            return new MainMenuPageObject(_webDriver);
+        }
+
         public MainMenuPageObject getActualResult()
         {
             _webDriver.FindElement(_actualResult);
