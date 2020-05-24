@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System;
 using System.Threading;
 
 namespace EbatePackageTests
@@ -14,6 +15,7 @@ namespace EbatePackageTests
         {
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
             
         }
@@ -28,8 +30,15 @@ namespace EbatePackageTests
             loginPage.Login(creds.Email, creds.Password);
             Thread.Sleep(1000);
             loginTenantnPage.ChooseFirstTenant();
+            string expectedResult = "Artem Ivanov";
 
-            Assert.Pass();
+            var actualResult = driver.FindElement(By.XPath("//*[@id=\"userMenu\"]/span")).Text;
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+        [TearDown]
+        public void Teardown()
+        {
+            driver.Quit();
         }
     }
 }
