@@ -43,27 +43,28 @@ namespace EbatePackageTests
             packagesScreen.ClickAddPackageBtn();
             addPackagePopup.ClickCustomerType();
             addPackagePopup.ClickAllCompanies();
-            addPackagePopup.ClickPeriodInput();
+            //addPackagePopup.ClickPeriodInput();
             for (int i = 0; i<6; i++)
             {
                 actions.SendKeys(Keys.ArrowDown).Perform();  // Period date ONGOING
             }
 
-            addPackagePopup.ClickDescription();
+            //addPackagePopup.ClickDescription();
             string description = "Selenium Package For Customer for All Companies Ongoing - " + int0to9*int0to9;
             actions.SendKeys(description).Perform();
 
-            addPackagePopup.ClickBudget();
+            //addPackagePopup.ClickBudget();
             actions.SendKeys("1").Perform();
-            addPackagePopup.ClickTarget();
+            //addPackagePopup.ClickTarget();
             actions.SendKeys("1").Perform();
 
-            addPackagePopup.ClickStartDate();
+            // TO DO
+            //addPackagePopup.ClickStartDate();
             actions.SendKeys(Keys.Home).Perform();
             string startDate = "1001200" + int0to9;
             actions.SendKeys(startDate).Perform();
 
-            addPackagePopup.ClickEndDate();
+            //addPackagePopup.ClickEndDate();
             actions.SendKeys(Keys.Home).Perform();
             string endDate = "3012202" + int0to9;
             actions.SendKeys(endDate).Perform();

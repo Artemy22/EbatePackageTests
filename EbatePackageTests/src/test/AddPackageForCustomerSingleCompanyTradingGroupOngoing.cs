@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace EbatePackageTests
 {
-    public class AddPackageForCustomerSingleCompanyInvoiceAccountOngoing
+    public class AddPackageForCustomerSingleCompanyTradingGroupOngoing
     {
         private IWebDriver driver;
         private readonly Credentials creds = new Credentials();
@@ -47,57 +47,29 @@ namespace EbatePackageTests
             // add package flow
 
             addPackagePopup.ClickCustomerType();
-            addPackagePopup.ClickSingleCompanyAccountTypeDropDown();            
-            //actions.SendKeys(Keys.ArrowDown).Perform();            
-            actions.SendKeys(Keys.Enter).Perform();
-            addPackagePopup.ClickCompanyNameDropDown();            
-            actions.SendKeys(Keys.Space).Perform();
-            actions.SendKeys(Keys.Space).Perform();
-            Thread.Sleep(1000);
-            actions.SendKeys(Keys.ArrowDown).Perform();
-            actions.SendKeys(Keys.ArrowDown).Perform();
-            actions.SendKeys(Keys.Enter).Perform(); // QA trade company is chosen
-            addPackagePopup.SetChosenCompany();
-            addPackagePopup.ClickPeriodInput();
-            for (int i = 0; i < 6; i++)
-            {
-                actions.SendKeys(Keys.ArrowDown).Perform();  // Period date ONGOING
-            }
-
-            addPackagePopup.ClickDescription();
-            string description = "Selenium Add Package For Customer Single Company Trade Group Ongoing - " + int0to9*int0to9;
-            actions.SendKeys(description).Perform();
-
-            addPackagePopup.ClickBudget();
-            actions.SendKeys("1").Perform();
-            addPackagePopup.ClickTarget();
-            actions.SendKeys("1").Perform();
-
-            addPackagePopup.ClickStartDate();
-            actions.SendKeys(Keys.Home).Perform();
-            string startDate = "1001200" + int0to9;
-            actions.SendKeys(startDate).Perform();
-
-            addPackagePopup.ClickEndDate();
-            actions.SendKeys(Keys.Home).Perform();
-            string endDate = "3012202" + int0to9;
-            actions.SendKeys(endDate).Perform();
-
-
-            addPackagePopup.ClickSaveBtn();
-            Thread.Sleep(500);
+            addPackagePopup.SetAccountTypeTradingGroup();
+            Thread.Sleep(100);
+            addPackagePopup.SetTradingGroupCompany();
+            addPackagePopup.SetkPeriodOngoing();
+            addPackagePopup.SetStartDate();
+            addPackagePopup.SetEndDate();
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string description = "Add Package For Customer Single Company Trading Group Ongoing. Timestamp: " + unixTimestamp;
+            addPackagePopup.SetDescription(description);
+            addPackagePopup.SetBudget();
+            addPackagePopup.SetTarget();
+            addPackagePopup.ClickSaveBtn();     
+            Thread.Sleep(100);
             packagesScreen.ClickOrderById();
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             packagesScreen.ClickOrderById();
             Thread.Sleep(1000);
 
             var actualResult = driver.FindElement(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]")).Text;
-
             Assert.AreEqual(description, actualResult);
         }
-
-        [TearDown]
-
+        
+            [TearDown]
         public void TearDown()
         {
             driver.Quit();
