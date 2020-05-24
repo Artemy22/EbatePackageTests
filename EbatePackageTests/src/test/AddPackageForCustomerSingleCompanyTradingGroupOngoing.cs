@@ -50,7 +50,7 @@ namespace EbatePackageTests
             addPackagePopup.SetAccountTypeTradingGroup();
             Thread.Sleep(100);
             addPackagePopup.SetTradingGroupCompany();
-            addPackagePopup.SetkPeriodOngoing();
+            addPackagePopup.SetPeriodOngoing();
             addPackagePopup.SetStartDate();
             addPackagePopup.SetEndDate();
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;

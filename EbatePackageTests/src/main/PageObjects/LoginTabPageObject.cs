@@ -26,8 +26,6 @@ namespace EbatePackageTests
             _webDriver.FindElement(_saveButton).Click();
 
             return new LoginTabPageObject(_webDriver);
-
         }
-
     }
 }

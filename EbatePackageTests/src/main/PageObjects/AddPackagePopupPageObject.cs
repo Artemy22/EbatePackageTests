@@ -75,7 +75,7 @@ namespace EbatePackageTests
             _webDriver.FindElement(_AllCompanies).Click();
             return new MainMenuPageObject(_webDriver);
         }
-        public MainMenuPageObject SetkPeriodOngoing()
+        public MainMenuPageObject SetPeriodOngoing()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_periodInput).Click();
@@ -96,7 +96,6 @@ namespace EbatePackageTests
             Actions actions = new Actions(_webDriver);
             int intFirst = rnd.Next(1, 9);
             int intSecond = rnd.Next(0, 9);
-
             _webDriver.FindElement(_endDate).Click();
             actions.SendKeys(Keys.Home).Perform();
             actions.SendKeys("010120" + intFirst+intSecond).Perform();
@@ -153,7 +152,6 @@ namespace EbatePackageTests
             actions.SendKeys(Keys.Enter + Keys.ArrowDown).Perform();
             return new MainMenuPageObject(_webDriver);
         }
-
 
         public MainMenuPageObject SetTradingGroupCompany()
         {
