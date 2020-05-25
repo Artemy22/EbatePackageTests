@@ -16,10 +16,10 @@ namespace EbatePackageTests
         [SetUp]
         public void Setup()
         {
-            driver = new OpenQA.Selenium.Chrome.ChromeDriver();
+            driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");            
+            driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
         }
 
         [Test]
