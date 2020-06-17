@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbatePackageTests", "EbateP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTesting", "ApiTesting\ApiTesting.csproj", "{31385D24-3C9F-42CC-960B-9FF950453988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTest", "NUnitTestProject1\SpecFlowTest.csproj", "{D611F01F-9BD1-40DF-A26C-357BC32ABF8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowTest", "SpecFlowTest\SpecFlowTest.csproj", "{02321334-4608-4168-B210-CFA6CD7FFCAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{31385D24-3C9F-42CC-960B-9FF950453988}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31385D24-3C9F-42CC-960B-9FF950453988}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31385D24-3C9F-42CC-960B-9FF950453988}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D611F01F-9BD1-40DF-A26C-357BC32ABF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D611F01F-9BD1-40DF-A26C-357BC32ABF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D611F01F-9BD1-40DF-A26C-357BC32ABF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D611F01F-9BD1-40DF-A26C-357BC32ABF8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
