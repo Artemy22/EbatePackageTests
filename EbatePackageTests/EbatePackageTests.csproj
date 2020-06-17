@@ -7,10 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\test\qhi44p40.sa1~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
 	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+	<PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="Selenium.Chrome.WebDriver" Version="83.0.0" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.26.0" />
+    <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
+	<PackageReference Include="SpecFlow.Allure" Version="3.0.0.10" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>
 
