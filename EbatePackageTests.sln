@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbatePackageTests", "EbatePackageTests\EbatePackageTests.csproj", "{530D13B2-D133-4106-B32A-716E9663B6A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbatePackageTests", "EbatePackageTests\EbatePackageTests.csproj", "{530D13B2-D133-4106-B32A-716E9663B6A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTesting", "ApiTesting\ApiTesting.csproj", "{31385D24-3C9F-42CC-960B-9FF950453988}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowTest", "SpecFlowTest\SpecFlowTest.csproj", "{02321334-4608-4168-B210-CFA6CD7FFCAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{530D13B2-D133-4106-B32A-716E9663B6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{530D13B2-D133-4106-B32A-716E9663B6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{530D13B2-D133-4106-B32A-716E9663B6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31385D24-3C9F-42CC-960B-9FF950453988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31385D24-3C9F-42CC-960B-9FF950453988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31385D24-3C9F-42CC-960B-9FF950453988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31385D24-3C9F-42CC-960B-9FF950453988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02321334-4608-4168-B210-CFA6CD7FFCAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

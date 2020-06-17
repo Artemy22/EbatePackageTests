@@ -11,7 +11,6 @@ namespace EbatePackageTests
     {
         private IWebDriver driver;
         private readonly Credentials creds = new Credentials();
-        readonly Random rnd = new Random();
 
         [SetUp]
         public void Setup()
@@ -31,8 +30,6 @@ namespace EbatePackageTests
             var packagesScreen = new PackagesScreenPageObject(driver);
             var priceManagmentDropDown = new PriceManagmentDropDownPageObject(driver);
             var addPackagePopup = new AddPackagePopupPageObject(driver);
-            var actions = new Actions(driver);
-            int int0to9 = rnd.Next(0, 9);
                    
            
             loginPage.Login(creds.Email, creds.Password);           
@@ -54,9 +51,9 @@ namespace EbatePackageTests
             addPackagePopup.SetBudget();
             addPackagePopup.SetTarget();
             addPackagePopup.ClickSaveBtn();
-            Thread.Sleep(100);
+            Thread.Sleep(700);
             packagesScreen.ClickOrderById();
-            Thread.Sleep(100);
+            Thread.Sleep(700);
             packagesScreen.ClickOrderById();
             Thread.Sleep(1000);
 
