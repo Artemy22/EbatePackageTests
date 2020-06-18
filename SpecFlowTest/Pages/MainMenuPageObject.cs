@@ -3,78 +3,38 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EbatePackageTests
+namespace SpecFlowTest
 {
     class MainMenuPageObject
     {
-        private IWebDriver _webDriver;
-
-        public readonly By _mainLogo = By.XPath("//*[@id=\"menuLogo\"]");
-        public readonly By _meinentanceHeader = By.XPath("//*[@id=\"maintenance\"]");
-        public readonly By _pricingManagementHeader = By.XPath("//*[@id=\"pricingManagement\"]");
-        public readonly By _financeHeader = By.XPath("//*[@id=\"finance\"]");
-        public readonly By _reportingHeader = By.XPath("//*[@id=\"reporting\"]");
-        public readonly By _version = By.XPath("//*[@id=\"version\"]");
-        public readonly By _notifications = By.XPath("//*[@id=\"notifications\"]");
-        public readonly By _help = By.XPath("//*[@id=\"help\"]");
-        public readonly By _userMenu = By.XPath("//*[@id=\"userMenu\"]");
-        public readonly By _signOutButton = By.XPath("//*[@id=\"userDropdown\"]/li[3]/div[1]");
-
+        public IWebDriver WebDriver { get; }
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
-            _webDriver = webDriver;
+            WebDriver = webDriver;
         }
+        
+        public IWebElement _mainLogo => WebDriver.FindElement(By.Id("menuLogo"));
+        public IWebElement _meinentanceHeader => WebDriver.FindElement(By.XPath("//*[@id=\"maintenance\"]"));
+        public IWebElement _pricingManagementHeader => WebDriver.FindElement(By.XPath("//*[@id=\"pricingManagement\"]"));
+        public IWebElement _financeHeader => WebDriver.FindElement(By.XPath("//*[@id=\"finance\"]"));
+        public IWebElement _reportingHeader => WebDriver.FindElement(By.XPath("//*[@id=\"reporting\"]"));
+        public IWebElement _version => WebDriver.FindElement(By.XPath("//*[@id=\"version\"]"));
+        public IWebElement _notifications => WebDriver.FindElement(By.XPath("//*[@id=\"notifications\"]"));
+        public IWebElement _help => WebDriver.FindElement(By.XPath("//*[@id=\"help\"]"));
+        public IWebElement _userMenu => WebDriver.FindElement(By.XPath("//*[@id=\"userMenu\"]"));
+        public IWebElement _signOutButton => WebDriver.FindElement(By.XPath("//*[@id=\"userDropdown\"]/li[3]/div[1]"));
 
-        public MainMenuPageObject ClickMainLogo()
-        {
-            _webDriver.FindElement(_mainLogo).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickMeinentanceHeader()
-        {
-            _webDriver.FindElement(_meinentanceHeader).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickPricingManagementHeader()
-        {
-            _webDriver.FindElement(_pricingManagementHeader).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickFinanceHeader()
-        {
-            _webDriver.FindElement(_financeHeader).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickReportingHeader()
-        {
-            _webDriver.FindElement(_reportingHeader).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickVersion()
-        {
-            _webDriver.FindElement(_version).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickNotifications()
-        {
-            _webDriver.FindElement(_notifications).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickHelp()
-        {
-            _webDriver.FindElement(_help).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickUserDropDownMenu()
-        {
-            _webDriver.FindElement(_userMenu).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
-        public MainMenuPageObject ClickSignOutButton()
-        {
-            _webDriver.FindElement(_signOutButton).Click();
-            return new MainMenuPageObject(_webDriver);
-        }
+        public void ClickMainLogo() => _mainLogo.Click();
+        public void ClickMeinentanceHeader() => _meinentanceHeader.Click();
+        public void ClickPricingManagementHeader() => _pricingManagementHeader.Click();
+        public void ClickFinanceHeader() => _financeHeader.Click();
+        public void ClickReportingHeader() => _reportingHeader.Click();
+        public void ClickVersion() => _version.Click();
+        public void ClickNotifications() => _notifications.Click();
+        public void ClickHelp() => _help.Click();
+        public void ClickUserMenu() => _userMenu.Click();
+        public void ClickSignOutButton() => _signOutButton.Click();
+
     }
 }

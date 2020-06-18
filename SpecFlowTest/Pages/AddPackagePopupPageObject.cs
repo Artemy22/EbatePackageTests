@@ -1,11 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
-namespace EbatePackageTests
+namespace SpecFlowTest
 {
     class AddPackagePopupPageObject
     {
@@ -244,8 +243,16 @@ namespace EbatePackageTests
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("art").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000014) Artem Inc.']")).Click();
+
+            //SelectElement selectElement = new SelectElement(_webDriver.FindElement(By.XPath("//*[@id=\"companiesSearch\"]/span/kendo-searchbar")));
+            //selectElement.SelectByValue("(NGBUnited Kingdom000014) Artem Inc.");
+
+            //actions.SendKeys("(NGBUnited Kingdom000014) Artem Inc.").Perform();
+            //Thread.Sleep(500);
+            //actions.SendKeys(Keys.ArrowDown).Perform();
+            //actions.SendKeys(Keys.Enter).Perform();
+
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
