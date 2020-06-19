@@ -1,10 +1,10 @@
-﻿Feature: EBD-181-Create-A-Package
-	Creation invoice packages flow 
+﻿Feature: EBD-214-Edit-Package
+	Edit an existing package
 
 @mytag
 Scenario: Create packages
 	Given Open Chrome browser
-	And Navigate to Pricing Management > Packages
+	And Navigate to Pricing Management > Packages. 
 	And Click the Add button
 	And Select a company type Customer
 	And Select an Account Type Invoice
