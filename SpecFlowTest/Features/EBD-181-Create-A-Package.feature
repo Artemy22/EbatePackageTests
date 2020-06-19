@@ -3,7 +3,7 @@
 
 @mytag
 Scenario: Create packages
-	Given Open Chrome browser
+	Given Opened Chrome browser
 	And Navigate to Pricing Management > Packages
 	And Click the Add button
 	And Select a company type Customer

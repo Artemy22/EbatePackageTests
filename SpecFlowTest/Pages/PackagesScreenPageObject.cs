@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SpecFlowTest
@@ -36,11 +38,18 @@ namespace SpecFlowTest
         }
         public PackagesScreenPageObject ClickOrderById()
         {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_orderById).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
         public PackagesScreenPageObject SelectFirstRow()
         {
+            /*
+             * wait until implementation
+             */
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_firstRow).Click();
             return new PackagesScreenPageObject(_webDriver);
         }

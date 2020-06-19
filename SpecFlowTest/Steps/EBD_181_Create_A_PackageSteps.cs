@@ -14,7 +14,7 @@ namespace SpecFlowTest.Steps
         private IWebDriver driver;
         string description;
 
-        [Given(@"Open Chrome browser")]
+        [Given(@"Opened Chrome browser")]
         public void GivenOpenChromeBrowser()
         {            
             driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
@@ -32,7 +32,7 @@ namespace SpecFlowTest.Steps
             MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
             mainMenuPageObject.ClickPricingManagementHeader();
             PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
-            priceManagmentDropDownPageObject.ClickPackages();            
+            priceManagmentDropDownPageObject.ClickPackages();
         }
 
         [Given(@"Click the Add button")]

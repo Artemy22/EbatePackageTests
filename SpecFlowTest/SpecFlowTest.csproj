@@ -23,17 +23,4 @@
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.97" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Features\EBD-214-Edit-Package.feature.cs">
-      <DependentUpon>EBD-214-Edit-Package.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Features\EBD-214-Edit-Package.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-  </ItemGroup>
-
 </Project>

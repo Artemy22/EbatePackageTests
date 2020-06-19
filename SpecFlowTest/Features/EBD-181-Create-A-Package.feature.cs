@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("Open Chrome browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("Opened Chrome browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
  testRunner.And("Navigate to Pricing Management > Packages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

@@ -1,14 +1,12 @@
 ﻿Feature: EBD-214-Edit-Package
-	Edit an existing package
+	Editing an existing package
 
 @mytag
-Scenario: Create packages
-	Given Open Chrome browser
-	And Navigate to Pricing Management > Packages. 
-	And Click the Add button
-	And Select a company type Customer
-	And Select an Account Type Invoice
-	And Select the company
-	And Complete the remaining fields
-	And Click the Save button
-	Then Check if a package has been created
+Scenario: Edit package
+	Given Chrome browser is opened
+	And I Navigate to Pricing Management > Packages
+	When I pick a package to change and click the EDIT button
+	Then Modify package popup appears
+	And I change e.g. a description value
+	When I click save button
+	Then Changes saved successfully
