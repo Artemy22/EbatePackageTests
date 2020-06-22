@@ -178,6 +178,14 @@ namespace SpecFlowTest
             _webDriver.FindElement(_tabsNotesAddNewNoteBtn).Click();
             return new PackageEditorScreenPageObject(_webDriver);
         }
-    }
 
+        public bool IsPackageScreenOpened()
+        {
+            if (_webDriver.FindElement(_editPackageBtn).Displayed)
+            {
+                return true;
+            }
+            else return false;
+        }
+    }
 }

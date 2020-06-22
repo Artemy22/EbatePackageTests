@@ -31,6 +31,9 @@ namespace SpecFlowTest.Steps
             mainMenuPageObject.ClickPricingManagementHeader();
             PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
             priceManagmentDropDownPageObject.ClickPackages();
+            PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
+            packagesScreenPageObject.CheckPackagesLoaded();
+
         }
 
         [When(@"I pick a package to change and click the EDIT button")]
@@ -42,15 +45,13 @@ namespace SpecFlowTest.Steps
             action.SendKeys("1592576148").Perform();
             Thread.Sleep(1000);
             packagesScreenPageObject.SelectFirstRow();
-
         }
 
         [Then(@"Modify package popup appears")]
         public void ThenModifyPackagePopupAppears()
         {
             PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
-            packagesScreenPageObject.ClickActionEditButton();
-            
+            packagesScreenPageObject.ClickActionEditButton();            
         }
 
         [Then(@"I change e\.g\. a description value")]

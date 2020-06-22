@@ -87,6 +87,6 @@ namespace SpecFlowTest
             actions.SendKeys(Keys.End + " Changed").Perform();
             string getDerscrChanged = _webDriver.FindElement(_descriptionInput).GetAttribute("value");
             return getDerscrChanged;
-        }
+        }        
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -20,6 +21,7 @@ namespace SpecFlowTest
         public readonly By _actionCopyButton = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/div/div[4]");
         public readonly By _actionDeleteButton = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/div/div[5]");
         public readonly By _searchInput = By.XPath("//*[@id=\"filterText\"]");
+        public readonly By _descriptionFirstRow = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]/text()");
 
         public PackagesScreenPageObject(IWebDriver webDriver)
         {
@@ -39,7 +41,7 @@ namespace SpecFlowTest
         public PackagesScreenPageObject ClickOrderById()
         {
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
-            var element = wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_orderById).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
@@ -49,12 +51,14 @@ namespace SpecFlowTest
              * wait until implementation
              */
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
-            var element = wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_firstRow).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
         public PackagesScreenPageObject ClickActionEditButton()
         {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_actionEditButton).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
@@ -77,6 +81,31 @@ namespace SpecFlowTest
         {
             _webDriver.FindElement(_searchInput).Click();
             return new PackagesScreenPageObject(_webDriver);
+        }
+        public PackagesScreenPageObject CheckPackagesLoaded()
+        {
+            WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(c => c.FindElement(_firstRow));
+            _webDriver.FindElement(_searchInput).Click();
+            return new PackagesScreenPageObject(_webDriver);
+            //string myString = _webDriver.FindElement(_descriptionFirstRow).GetAttribute("value");
+            //string[] subStrings = myString.Split(',');
+            // string checkValue = null;
+            //foreach (string str in subStrings)
+            //{
+            //if (str == "1592576148")
+            //{
+            //checkValue = str;
+            //}
+            //else checkValue = null;
+            // }
+
+            // if (checkValue != null)
+            //{
+            //return new PackagesScreenPageObject(_webDriver);
+            //}
+            // else return null;
+            //}
         }
     }
 }
