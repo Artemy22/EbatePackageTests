@@ -22,6 +22,9 @@ namespace SpecFlowTest
         public readonly By _actionDeleteButton = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/div/div[5]");
         public readonly By _searchInput = By.XPath("//*[@id=\"filterText\"]");
         public readonly By _descriptionFirstRow = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]/text()");
+        public readonly By _getIdOfFirstRowPackage = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[3]");
+        public readonly By _deleteYesButton = By.XPath("//*[@id=\"gridPackageOverview\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[1]");
+        public readonly By _deleteNoButton = By.XPath("//*[@id=\"gridPackageOverview\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
 
         public PackagesScreenPageObject(IWebDriver webDriver)
         {
@@ -40,6 +43,7 @@ namespace SpecFlowTest
         }
         public PackagesScreenPageObject ClickOrderById()
         {
+            Thread.Sleep(1000);
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
             wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_orderById).Click();
@@ -50,6 +54,7 @@ namespace SpecFlowTest
             /*
              * wait until implementation
              */
+            Thread.Sleep(1000);
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
             wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_firstRow).Click();
@@ -106,6 +111,19 @@ namespace SpecFlowTest
             //}
             // else return null;
             //}
+        }
+
+        public string GetPackageIdFirstRow()
+        {          
+            return _webDriver.FindElement(_getIdOfFirstRowPackage).Text;
+        }
+
+        public PackageEditorScreenPageObject DeleteFlow()
+        {            
+            _webDriver.FindElement(_actionDeleteButton).Click();
+            Thread.Sleep(1000);
+            _webDriver.FindElement(_deleteYesButton).Click();
+            return new PackageEditorScreenPageObject(_webDriver);
         }
     }
 }
