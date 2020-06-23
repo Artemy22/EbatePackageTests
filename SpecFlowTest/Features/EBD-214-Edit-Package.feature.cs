@@ -75,13 +75,13 @@ namespace SpecFlowTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit package")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("testCasesFromTestBoard")]
         public virtual void EditPackage()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
+                    "testCasesFromTestBoard"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit package", null, new string[] {
-                        "mytag"});
+                        "testCasesFromTestBoard"});
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

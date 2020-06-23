@@ -11,6 +11,8 @@ namespace SpecFlowTest
     public class EBD_216_View_PackageSteps
     {
         private IWebDriver driver;
+                
+        //private readonly IWebDriver driver;
 
         [Given(@"Open Chrome browser")]
         public void GivenOpenChromeBrowser()
@@ -51,6 +53,7 @@ namespace SpecFlowTest
         {
             PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
             Assert.IsTrue(packageEditorScreenPageObject.IsPackageScreenOpened());
+            driver.Close();
         }
     }
 }

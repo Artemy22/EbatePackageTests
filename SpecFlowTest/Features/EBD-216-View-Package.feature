@@ -1,7 +1,7 @@
 ﻿Feature: EBD-216-View-Package
 	View packages flow
 
-@mytag
+@testCasesFromTestBoard
 Scenario: View Package
 	Given Open Chrome browser
 	Then Navigate to Pricing Management > Packages

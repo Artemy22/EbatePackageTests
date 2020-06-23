@@ -1,7 +1,7 @@
 ﻿Feature: EBD-181-Create-A-Package
 	Creation invoice packages flow 
 
-@mytag
+@testCasesFromTestBoard
 Scenario: Create packages
 	Given Opened Chrome browser
 	And Navigate to Pricing Management > Packages

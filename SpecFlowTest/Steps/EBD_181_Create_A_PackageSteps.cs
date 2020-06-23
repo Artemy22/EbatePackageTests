@@ -93,6 +93,7 @@ namespace SpecFlowTest.Steps
             actions.SendKeys(description + Keys.Enter).Perform();
             var actualResult = driver.FindElement(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]")).Text;
             Assert.IsNotNull(actualResult);
+            driver.Close();
         }
     }
 }

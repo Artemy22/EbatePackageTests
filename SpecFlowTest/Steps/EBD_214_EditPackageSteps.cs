@@ -20,6 +20,7 @@ namespace SpecFlowTest.Steps
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
+
         }
         
         [Given(@"I Navigate to Pricing Management > Packages")]
@@ -73,9 +74,9 @@ namespace SpecFlowTest.Steps
         [Then(@"Changes saved successfully")]
         public void ThenChangesSavedSuccessfully()
         {
-            var packagesScreen = new PackagesScreenPageObject(driver);
             var actualResult = driver.FindElement(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]")).Text;
             Assert.AreEqual(descrActual, actualResult);
+            driver.Close();
         }
 
     }

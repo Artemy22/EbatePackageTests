@@ -75,13 +75,13 @@ namespace SpecFlowTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create packages")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("testCasesFromTestBoard")]
         public virtual void CreatePackages()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
+                    "testCasesFromTestBoard"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create packages", null, new string[] {
-                        "mytag"});
+                        "testCasesFromTestBoard"});
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

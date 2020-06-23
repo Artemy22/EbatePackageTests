@@ -1,7 +1,7 @@
 ﻿Feature: EBD-215-Delete-Package
 	Delete package flow
 
-@mytag
+@testCasesFromTestBoard
 Scenario: Delete package
 	Given Open Chrome br.
 	And Navigate to Pricing Management > Packages.

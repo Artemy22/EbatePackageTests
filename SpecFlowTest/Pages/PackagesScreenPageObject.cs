@@ -93,24 +93,6 @@ namespace SpecFlowTest
             wait.Until(c => c.FindElement(_firstRow));
             _webDriver.FindElement(_searchInput).Click();
             return new PackagesScreenPageObject(_webDriver);
-            //string myString = _webDriver.FindElement(_descriptionFirstRow).GetAttribute("value");
-            //string[] subStrings = myString.Split(',');
-            // string checkValue = null;
-            //foreach (string str in subStrings)
-            //{
-            //if (str == "1592576148")
-            //{
-            //checkValue = str;
-            //}
-            //else checkValue = null;
-            // }
-
-            // if (checkValue != null)
-            //{
-            //return new PackagesScreenPageObject(_webDriver);
-            //}
-            // else return null;
-            //}
         }
 
         public string GetPackageIdFirstRow()

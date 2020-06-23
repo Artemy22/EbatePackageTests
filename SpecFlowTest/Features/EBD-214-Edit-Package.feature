@@ -1,7 +1,7 @@
 ﻿Feature: EBD-214-Edit-Package
 	Editing an existing package
 
-@mytag
+@testCasesFromTestBoard
 Scenario: Edit package
 	Given Chrome browser is opened
 	And I Navigate to Pricing Management > Packages

@@ -75,13 +75,13 @@ namespace SpecFlowTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Delete package")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("testCasesFromTestBoard")]
         public virtual void DeletePackage()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
+                    "testCasesFromTestBoard"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete package", null, new string[] {
-                        "mytag"});
+                        "testCasesFromTestBoard"});
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

@@ -54,6 +54,7 @@ namespace SpecFlowTest.Steps
             Thread.Sleep(1000);
             string actualResult = packagesScreenPageObject.GetPackageIdFirstRow();
             Assert.IsFalse(expectedResult == actualResult);
+            driver.Close();
         }
     }
 }

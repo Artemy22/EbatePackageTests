@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,13 +13,13 @@ namespace SpecFlowTest
         public readonly By _BreadCrumbsHomeBtn = By.XPath("//*[@id=\"linkHome\"]");
         public readonly By _BreadCrumbPackageBtn = By.XPath("//*[@id=\"linkPackage\"]");
         public readonly By _editPackageBtn = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[1]/div/button");
-        public readonly By _tabsAgreements = By.XPath("//*[@id=\"k - tabstrip - tab - 0\"]");
-        public readonly By _tabsCriteria = By.XPath("//*[@id=\"k - tabstrip - tab - 1\"]");
-        public readonly By _tabsDocuments = By.XPath("//*[@id=\"k - tabstrip - tab - 2\"]");
-        public readonly By _tabsNotes = By.XPath("//*[@id=\"k - tabstrip - tab - 3\"]");
-        public readonly By _tabsAudit = By.XPath("//*[@id=\"k - tabstrip - tab - 4\"]");
+        public readonly By _tabsAgreements = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[1]/span");
+        public readonly By _tabsCriteria = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[2]/span");
+        public readonly By _tabsDocuments = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[3]/span");
+        public readonly By _tabsNotes = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[4]/span");
+        public readonly By _tabsAudit = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[5]/span");
         public readonly By _tabsAgreementsSearchInput = By.XPath("//*[@id=\"filterText\"]");
-        public readonly By _tabsAgreementsAddNewBtn = By.XPath("//*[@id=\"addPackage\"]");
+        public readonly By _tabsAgreementsAddNewBtn = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-package-agreement/div[1]/button");
         public readonly By _tabsAgreementsChooseFirstRow = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label");
         public readonly By _tabsAgreementsOrderById = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[3]/a");
         public readonly By _tabsAgreementsOpenRebatesDropDownOfFirstRow = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[1]/a");
@@ -36,6 +37,7 @@ namespace SpecFlowTest
         public readonly By _tabsDocumentsUploadtNewDocumentBtn = By.XPath("//*[@id=\"action0\"]");
         public readonly By _tabsDocumentsDeleteDocumentBtn = By.XPath("//*[@id=\"action32\"]");
         public readonly By _tabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"action0\"]");
+        public readonly By _clickNoButtonAddCriteriaPopup = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
 
 
         public PackageEditorScreenPageObject(IWebDriver webDriver)
@@ -60,8 +62,16 @@ namespace SpecFlowTest
         }
         public PackageEditorScreenPageObject ClickTabsAgreements()
         {
-            _webDriver.FindElement(_tabsAgreements).Click();
-            return new PackageEditorScreenPageObject(_webDriver);
+            if (_webDriver.FindElement(_tabsAgreements).Displayed == false)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                _webDriver.FindElement(_tabsAgreements).Click();
+                return new PackageEditorScreenPageObject(_webDriver);
+            }
+
         }
         public PackageEditorScreenPageObject ClickTabsAgreementsSearchInput()
         {
@@ -177,6 +187,18 @@ namespace SpecFlowTest
         {
             _webDriver.FindElement(_tabsNotesAddNewNoteBtn).Click();
             return new PackageEditorScreenPageObject(_webDriver);
+        }
+
+        public PackageEditorScreenPageObject ClickNoButtonAddCriteria()
+        {
+            _webDriver.FindElement(_clickNoButtonAddCriteriaPopup).Click();
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+
+        public bool IfCriteriaPopupAppeared()
+        {
+            bool isPresented = _webDriver.FindElement(_clickNoButtonAddCriteriaPopup).Displayed;
+            return isPresented;
         }
 
         public bool IsPackageScreenOpened()
