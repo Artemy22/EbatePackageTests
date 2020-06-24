@@ -11,7 +11,7 @@ namespace SpecFlowTest.Steps
     public class EBD_214_Edit_PackageSteps
     {
         private IWebDriver driver;
-        string descrActual;
+        string descrExpected;
 
         [Given(@"Chrome browser is opened")]
         public void GivenChromeBrowserIsOpened()
@@ -59,7 +59,7 @@ namespace SpecFlowTest.Steps
         public void ThenIChangeE_G_ADescriptionValue()
         {
             ModifyPackagePopupPageObject modifyPackagePopupPageObject = new ModifyPackagePopupPageObject(driver);
-            descrActual = modifyPackagePopupPageObject.ChangeDescription();
+            descrExpected = modifyPackagePopupPageObject.ChangeDescription();
         }
 
         [When(@"I click save button")]
@@ -75,7 +75,7 @@ namespace SpecFlowTest.Steps
         public void ThenChangesSavedSuccessfully()
         {
             var actualResult = driver.FindElement(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]")).Text;
-            Assert.AreEqual(descrActual, actualResult);
+            Assert.AreEqual(descrExpected, actualResult);
             driver.Close();
         }
 

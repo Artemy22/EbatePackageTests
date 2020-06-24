@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace SpecFlowTest
@@ -23,7 +25,7 @@ namespace SpecFlowTest
         public readonly By _deleteYesButton = By.XPath("//*[@id=\"gridAgreement\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[1]");
         public readonly By _deleteNoButton = By.XPath("//*[@id=\"gridAgreement\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
         public readonly By _gridLabel = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[1]/h3");
-
+        public readonly By FirstRow = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement/section[2]/div/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]");
         
 
         public AgreementsScreenPageObject(IWebDriver webDriver)
@@ -48,10 +50,9 @@ namespace SpecFlowTest
         {
             /*
              * wait until implementation
-             */
-            Thread.Sleep(1000);
+             */            
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]")).FirstOrDefault());
+            wait.Until(d => d.FindElements(By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement/section[2]/div/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[5]")).FirstOrDefault());
             _webDriver.FindElement(_firstRow).Click();
             return new AddAgreementPopupPageObject(_webDriver);
         }
@@ -98,13 +99,31 @@ namespace SpecFlowTest
             return _webDriver.FindElement(_getIdOfFirstRowPackage).Text;
         }
 
-        public PackageEditorScreenPageObject DeleteFlow()
+        public AddAgreementPopupPageObject DeleteFlow()
         {            
             _webDriver.FindElement(_actionDeleteButton).Click();
             Thread.Sleep(1000);
             _webDriver.FindElement(_deleteYesButton).Click();
-            return new PackageEditorScreenPageObject(_webDriver);
+            return new AddAgreementPopupPageObject(_webDriver);
         }
+
+        public AddAgreementPopupPageObject ChooseSeleniumAgreement()
+        {            
+            _webDriver.FindElement(_searchInput).Click();
+            Actions actions = new Actions(_webDriver);
+            actions.SendKeys("Selenium").Perform();
+            Thread.Sleep(2000);
+            SelectFirstRow();
+            return new AddAgreementPopupPageObject(_webDriver);
+        }
+
+        public AddAgreementPopupPageObject WaitUntillLoaded()
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement/section[2]/div/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[5]"))).FirstOrDefault();
+            return new AddAgreementPopupPageObject(_webDriver);
+        }
+
     }
 }
 

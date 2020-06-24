@@ -84,11 +84,11 @@ namespace SpecFlowTest
         {
             try
             {
-                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfAlreadyExistAnyAgreements).Click();
+                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfNoAgreementsExists).Click();
             }
             catch
             {
-                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfNoAgreementsExists).Click();
+                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfAlreadyExistAnyAgreements).Click();
             }
             return new PackageEditorScreenPageObject(_webDriver);
         }
