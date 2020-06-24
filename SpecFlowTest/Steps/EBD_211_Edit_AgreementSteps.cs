@@ -12,12 +12,8 @@ namespace SpecFlowTest.Steps
     {
         private static readonly IWebDriver driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
         private readonly Basic basic = new Basic();
-        private readonly Actions action = new Actions(driver);
         private readonly MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
-        private readonly PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
         private readonly PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
-        private readonly PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
-        private readonly AddAgreementPopupPageObject addAgreementPopupPageObject = new AddAgreementPopupPageObject(driver);
         private readonly AgreementsScreenPageObject agreementsScreenPageObject = new AgreementsScreenPageObject(driver);
         private readonly ModifyAgreementPopupPageObject modifyAgreementPopupPageObject = new ModifyAgreementPopupPageObject(driver);
 

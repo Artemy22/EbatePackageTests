@@ -58,7 +58,7 @@ namespace SpecFlowTest.Steps
         {
             Thread.Sleep(1000);
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            description = "Agreement by selenium. Timestamp: " + unixTimestamp;
+            description = "Agreement by SeleniumWithoutRebate. Timestamp: " + unixTimestamp;
             addAgreementPopupPageObject.SetBudget().SetTarget().SetStartDate().SetEndDate().SetDescription(description);
         }
 
