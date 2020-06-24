@@ -37,7 +37,7 @@ namespace SpecFlowTest.Steps
         public void GivenPickAgreementWitchYouWantToDelete()
         {
             agreementsScreenPageObject.WaitUntillLoaded();
-            agreementsScreenPageObject.ChooseSeleniumAgreement();
+            agreementsScreenPageObject.FindSeleniumAgreement();
             Expectedresult = agreementsScreenPageObject.SelectFirstRow();
         }
         

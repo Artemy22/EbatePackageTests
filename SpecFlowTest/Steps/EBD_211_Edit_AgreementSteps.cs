@@ -41,7 +41,8 @@ namespace SpecFlowTest.Steps
         [Then(@"Choose your Agreement")]
         public void ThenChooseYourAgreement()
         {
-            agreementsScreenPageObject.ChooseSeleniumAgreement();
+            agreementsScreenPageObject.FindSeleniumAgreement();
+            agreementsScreenPageObject.SelectFirstRow();
         }
 
         [Then(@"Click Edit button")]

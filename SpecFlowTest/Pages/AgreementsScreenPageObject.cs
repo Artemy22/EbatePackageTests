@@ -109,7 +109,7 @@ namespace SpecFlowTest
             return new AddAgreementPopupPageObject(_webDriver);
         }
 
-        public AddAgreementPopupPageObject ChooseSeleniumAgreement()
+        public AddAgreementPopupPageObject FindSeleniumAgreement()
         {            
             _webDriver.FindElement(_searchInput).Click();
             Actions actions = new Actions(_webDriver);
