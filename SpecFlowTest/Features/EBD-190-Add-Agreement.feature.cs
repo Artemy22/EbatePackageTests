@@ -75,13 +75,13 @@ namespace SpecFlowTest.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
+        [NUnit.Framework.DescriptionAttribute("Add Agreement flow")]
         [NUnit.Framework.CategoryAttribute("testCasesFromTestBoard")]
-        public virtual void AddTwoNumbers()
+        public virtual void AddAgreementFlow()
         {
             string[] tagsOfScenario = new string[] {
                     "testCasesFromTestBoard"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Agreement flow", null, new string[] {
                         "testCasesFromTestBoard"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -114,6 +114,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 11
  testRunner.When("Save the Agreement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 12
+ testRunner.Then("An added agreement is presented in the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 13
+ testRunner.And("chrome is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

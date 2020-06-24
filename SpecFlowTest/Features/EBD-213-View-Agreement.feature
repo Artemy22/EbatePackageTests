@@ -6,5 +6,7 @@ Scenario: Add two numbers
 	Given Open Crome browser.
 	And Choose an Agreement to look at
 	When Open a chosen agreement
-	Then Agreement editor screen is opened 
+	And Agreement editor screen is opened
+	Then Chrome closed
+
 

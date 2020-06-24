@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Threading;
@@ -9,58 +10,82 @@ namespace SpecFlowTest.Steps
     [Binding]
     public class EBD_190_Add_AgreementSteps
     {
-        private IWebDriver driver;
+        private static readonly IWebDriver driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
+        private readonly Basic basic = new Basic();
+        private readonly Actions action = new Actions(driver);
+        private readonly MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
+        private readonly PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
+        private readonly PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
+        private readonly PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
+        private readonly AddAgreementPopupPageObject addAgreementPopupPageObject = new AddAgreementPopupPageObject(driver);
+
         string description;
 
         [Given(@"Open chrome")]
         public void GivenOpenChrome()
         {
-            driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
         }
-        
+
         [Given(@"Open Package")]
         public void GivenOpenPackage()
         {
-            Basic basic = new Basic();
-            Actions action = new Actions(driver);
-            MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
-            PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
-            PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
-            PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
-
             basic.LoginFlow(driver);
             mainMenuPageObject.ClickPricingManagementHeader();
             priceManagmentDropDownPageObject.ClickPackages();
+            packagesScreenPageObject.WaitUntillLoaded();
             packagesScreenPageObject.ClickSearchInput();
-            action.SendKeys("owasp test").Perform();
+            action.SendKeys("owasp test AND 1=1").Perform();
             Thread.Sleep(1500);
-            packagesScreenPageObject.ClickOrderById().ClickOrderById().SelectFirstRow();
+            packagesScreenPageObject.SelectFirstRow();
             packagesScreenPageObject.ClickActionViewButton();
             Thread.Sleep(1500);
-            //if (packageEditorScreenPageObject.IfCriteriaPopupAppeared() == true)
-            //{
+            if (packageEditorScreenPageObject.IfCriteriaPopupAppeared())
+            {
                 packageEditorScreenPageObject.ClickNoButtonAddCriteria();
-            //}
-            Thread.Sleep(1500);
+            }
+            else Thread.Sleep(100);
             packageEditorScreenPageObject.ClickTabsAgreements();
-            packageEditorScreenPageObject.ClickTabsAgreementsAddNewBtn();            
+            Thread.Sleep(100);
+            packageEditorScreenPageObject.ClickTabsAgreementsAddNewBtn();           
+
         }
 
-        [When(@"Add agreement to the package")]
-        public void WhenAddAgreementToThePackage()
-        {            
-            
-        }
-        
-        [Then(@"Save the Agreement")]
-        public void ThenSaveTheAgreement()
+        [Given(@"Add agreement to the package")]
+        public void GivenAddAgreementToThePackage()
         {
-            
-            
-            
+            Thread.Sleep(1000);
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            description = "Agreement by selenium. Timestamp: " + unixTimestamp;
+            addAgreementPopupPageObject.SetBudget().SetTarget().SetStartDate().SetEndDate().SetDescription(description);
         }
+
+        [When(@"Save the Agreement")]
+        public void WhenSaveTheAgreement()
+        {
+            addAgreementPopupPageObject.ClickSaveButton();
+            if(addAgreementPopupPageObject.IsWarningAppeared() != false)
+            {
+                addAgreementPopupPageObject.WarningPopupClickYes();
+            }            
+        }
+
+        [Then(@"An added agreement is presented in the grid")]
+        public void ThenAnAddedAgreementIsPresentedInTheGrid()
+        {
+            packageEditorScreenPageObject.FindDescriptionUsingSearchInput(description);
+            Thread.Sleep(500);
+            Assert.IsTrue(packageEditorScreenPageObject.IsFirstRowAppeared());
+
+        }
+
+        [Then(@"chrome is closed")]
+        public void ThenChromeIsClosed()
+        {
+            driver.Close();
+        }
+
     }
 }

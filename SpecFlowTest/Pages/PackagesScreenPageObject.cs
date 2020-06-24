@@ -107,9 +107,11 @@ namespace SpecFlowTest
             _webDriver.FindElement(_deleteYesButton).Click();
             return new PackageEditorScreenPageObject(_webDriver);
         }
+        public PackagesScreenPageObject WaitUntillLoaded()
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[3]")).FirstOrDefault());
+            return new PackagesScreenPageObject(_webDriver);
+        }
     }
 }
-
-
-
-

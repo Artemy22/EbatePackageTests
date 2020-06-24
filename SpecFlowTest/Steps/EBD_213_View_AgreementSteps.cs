@@ -31,7 +31,6 @@ namespace SpecFlowTest.Steps
             priceManagmentDropDownPageObject.ClickAgreements();
             AgreementsScreenPageObject agreementsScreenPageObject = new AgreementsScreenPageObject(driver);
             agreementsScreenPageObject.SelectFirstRow();
-
         }
         
         [When(@"Open a chosen agreement")]
@@ -40,12 +39,19 @@ namespace SpecFlowTest.Steps
             AgreementsScreenPageObject agreementsScreenPageObject = new AgreementsScreenPageObject(driver);
             agreementsScreenPageObject.ClickActionViewButton();
         }
-        
-        [Then(@"Agreement editor screen is opened")]
+
+        [When(@"Agreement editor screen is opened")]
         public void ThenAgreementEditorScreenIsOpened()
         {
             AgreementsScreenPageObject agreementsScreenPageObject = new AgreementsScreenPageObject(driver);
             Assert.IsTrue(agreementsScreenPageObject.CheckIfAgreementScreenOpened());
         }
+
+        [Then(@"Chrome closed")]
+        public void ThenChromeClosed()
+        {
+            driver.Close();
+        }
+
     }
 }
