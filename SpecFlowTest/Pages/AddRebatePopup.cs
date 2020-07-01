@@ -2,15 +2,14 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 
 namespace SpecFlowTest
 {
     class AddRebatePopup
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;        
 
         public readonly By CalculationTypeDropDown = By.Id("calculationType");
         public readonly By CalculateAgainstDropDown = By.Id("priceTypeId");
@@ -34,15 +33,27 @@ namespace SpecFlowTest
         public readonly By SecondRatesPopupGrowthPercentageInput = By.Id("numScale");
         public readonly By SecondRatesPopupTierPercentageInput = By.Id("numScale");
         public readonly By SecondRatesPopupRebateInput = By.Id("numValue");
+        public readonly By CompanyInputInactive = By.Id("companyName");
 
-
-
-
+        public AddRebatePopup Waiter(int seconds, By element)
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
+            try
+            {
+                wait.Until(d => d.FindElements(element).FirstOrDefault());
+                return new AddRebatePopup(_webDriver);
+            }
+            catch
+            {
+                var neededElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+                return new AddRebatePopup(_webDriver);
+            }
+        }
 
         public AddRebatePopup(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-        }
+        }   
 
         public AddRebatePopup SetBudget()
         {
@@ -100,6 +111,7 @@ namespace SpecFlowTest
         public AddRebatePopup ChooseCalculationTypeStandardPercOfTurnover()
         {
             Actions actions = new Actions(_webDriver);
+            Waiter(15, CompanyInputInactive); 
             _webDriver.FindElement(CalculationTypeDropDown).Click();
             _webDriver.FindElement(By.XPath("//ul/li[text() = 'Standard % of Turnover']")).Click(); // add rates popup appeared - SecondRatesPopupRateInputPercentage2
             return new AddRebatePopup(_webDriver);
@@ -207,7 +219,9 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(CalculateAgainstDropDown).Click();
-            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Invoice price']")).Click();
+            string invoicePrice = "//ul/li[text() = 'Invoice price']";
+            Waiter(15, By.XPath(invoicePrice));
+            _webDriver.FindElement(By.XPath(invoicePrice)).Click();
             return new AddRebatePopup(_webDriver);
         }
 
