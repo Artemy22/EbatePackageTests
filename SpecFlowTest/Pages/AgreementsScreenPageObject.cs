@@ -41,7 +41,7 @@ namespace SpecFlowTest
         public AddAgreementPopupPageObject ClickOrderById()
         {
             Thread.Sleep(1000);
-            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(15));
             wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]")).FirstOrDefault());
             _webDriver.FindElement(_orderById).Click();
             return new AddAgreementPopupPageObject(_webDriver);
@@ -114,6 +114,14 @@ namespace SpecFlowTest
             _webDriver.FindElement(_searchInput).Click();
             Actions actions = new Actions(_webDriver);
             actions.SendKeys("SeleniumWithoutRebate").Perform();
+            Thread.Sleep(2000);
+            return new AddAgreementPopupPageObject(_webDriver);
+        }
+        public AddAgreementPopupPageObject FindSeleniumAgreementWithRebates()
+        {
+            _webDriver.FindElement(_searchInput).Click();
+            Actions actions = new Actions(_webDriver);
+            actions.SendKeys("1593002954").Perform();
             Thread.Sleep(2000);
             return new AddAgreementPopupPageObject(_webDriver);
         }

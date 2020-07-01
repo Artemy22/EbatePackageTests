@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -14,18 +15,20 @@ namespace SpecFlowTest
 
         public readonly By BreadCrumbsHomeBtn = By.Id("linkHome");
         public readonly By BreadCrumbAgreementBtn = By.Id("linkAgreement");
+        public readonly By TableHead = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul");
         public readonly By EditAgreementBtn = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[1]/div/button[2]");
-        public readonly By TabsRebate = By.XPath("//ul/li[text() = 'Rebate']");
+        public readonly By TabsRebate = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[1]");
         public readonly By TabsCriteria = By.XPath("//ul/li[text() = 'Criteria']");
         public readonly By TabsEventBasedIncentives = By.XPath("//ul/li[text() = 'Event-Based Incentives']");
         public readonly By TabsDocuments = By.XPath("//ul/li[text() = 'Documents']");
         public readonly By TabsNotes = By.XPath("//ul/li[text() = 'Notes']");
         public readonly By TabsAudit = By.XPath("//ul/li[text() = 'Audit']");
         public readonly By TabsRebateSearchInput = By.Id("filterText");
+        public readonly By TabsRebateFirstRowDescription = By.XPath("//*[@id=\"gridAgreementRebates\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[4]");
         public readonly By TabsRebateAddNewBtnIfNoOnesExisted = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-agreement-rebates/div[1]/button");
         public readonly By TabsRebateAddNewBtnIfAlreadyExistedOnes = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-agreement-rebates/div/base-grid/div/div[2]/div/div[2]/button/span/i");
         public readonly By TabsRebateFirstRowCheckBox = By.XPath("//*[@id=\"gridAgreementRebates\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[2]/label");
-        public readonly By TabsRebateOrderById = By.XPath("//*[@id=\"gridAgreementRebates\"]/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[3]/a/span");
+        public readonly By TabsRebateOrderById = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-agreement-rebates/div/base-grid/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[3]/a");
         public readonly By TabsRebateActionDelete = By.Id("action96");
         public readonly By TabsRebateActionView = By.Id("action32");
         public readonly By TabsRebateActionRequest = By.Id("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-agreement-rebates/div/base-grid/div/div[2]/div/div[5]/button/span/i");
@@ -43,7 +46,7 @@ namespace SpecFlowTest
         public readonly By TabsDocumentsDeleteBtn = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/div/div[2]");
         public readonly By TabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"gridDealNotes\"]/div/div[2]/div/div[2]");
 
-        
+
 
 
         public AgreementEditorPage(IWebDriver webDriver)
@@ -68,8 +71,9 @@ namespace SpecFlowTest
         }
         public AgreementEditorPage ClickTabsRebate()
         {
-           _webDriver.FindElement(TabsRebate).Click();
-           return new AgreementEditorPage(_webDriver);
+            _webDriver.FindElement(TableHead).Click();
+            _webDriver.FindElement(TabsRebate).Click();
+            return new AgreementEditorPage(_webDriver);
         }
         public AgreementEditorPage ClickTabsRebateSearchInput()
         {
@@ -98,13 +102,13 @@ namespace SpecFlowTest
             _webDriver.FindElement(TabsRebateOrderById).Click();
             return new AgreementEditorPage(_webDriver);
         }
-        
+
         public AgreementEditorPage ClickTabsRebateActionView()
         {
             _webDriver.FindElement(TabsRebateActionView).Click();
             return new AgreementEditorPage(_webDriver);
         }
-        
+
         public AgreementEditorPage ClickTabsRebateActionDelete()
         {
             _webDriver.FindElement(TabsRebateActionDelete).Click();
@@ -180,7 +184,7 @@ namespace SpecFlowTest
         {
             _webDriver.FindElement(TabsNotesAddNewNoteBtn).Click();
             return new AgreementEditorPage(_webDriver);
-        }  
+        }
 
         public bool IsFirstRowAppeared()
         {
@@ -198,7 +202,7 @@ namespace SpecFlowTest
                 return true;
             }
             else return false;
-        }        
+        }
 
         public AgreementEditorPage FindDescriptionUsingSearchInput(string description)
         {
@@ -206,6 +210,24 @@ namespace SpecFlowTest
             _webDriver.FindElement(TabsRebateSearchInput).Click();
             actions.SendKeys(description).Perform();
             return new AgreementEditorPage(_webDriver);
+        }
+
+        public bool CheckIfRebateAdded(string expectedResult)
+        {
+            IsFirstRowAppeared();
+            _webDriver.FindElement(TabsRebateOrderById).Click();
+            IsFirstRowAppeared();
+            Thread.Sleep(1000);
+            _webDriver.FindElement(TabsRebateOrderById).Click();
+            Thread.Sleep(2000);
+            _webDriver.FindElement(TabsRebateFirstRowCheckBox).Click();
+            string actualResult = _webDriver.FindElement(TabsRebateFirstRowDescription).Text;
+            Assert.AreEqual(expectedResult, actualResult);
+            return true;
+        }
+        public string GetDescription()
+        {
+            return _webDriver.FindElement(TabsRebateFirstRowDescription).Text;
         }
     }
 }
