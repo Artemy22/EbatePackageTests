@@ -1,7 +1,10 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -18,6 +21,10 @@ namespace SpecFlowTest
         public readonly By _actionCopyButton = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/div/div[4]");
         public readonly By _actionDeleteButton = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/div/div[5]");
         public readonly By _searchInput = By.XPath("//*[@id=\"filterText\"]");
+        public readonly By _descriptionFirstRow = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]/text()");
+        public readonly By _getIdOfFirstRowPackage = By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[3]");
+        public readonly By _deleteYesButton = By.XPath("//*[@id=\"gridPackageOverview\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[1]");
+        public readonly By _deleteNoButton = By.XPath("//*[@id=\"gridPackageOverview\"]/app-action-dialog/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
 
         public PackagesScreenPageObject(IWebDriver webDriver)
         {
@@ -36,16 +43,27 @@ namespace SpecFlowTest
         }
         public PackagesScreenPageObject ClickOrderById()
         {
+            Thread.Sleep(1000);
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_orderById).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
         public PackagesScreenPageObject SelectFirstRow()
         {
+            /*
+             * wait until implementation
+             */
+            Thread.Sleep(1000);
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_firstRow).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
         public PackagesScreenPageObject ClickActionEditButton()
         {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label")).FirstOrDefault());
             _webDriver.FindElement(_actionEditButton).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
@@ -69,9 +87,31 @@ namespace SpecFlowTest
             _webDriver.FindElement(_searchInput).Click();
             return new PackagesScreenPageObject(_webDriver);
         }
+        public PackagesScreenPageObject CheckPackagesLoaded()
+        {
+            WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(c => c.FindElement(_firstRow));
+            _webDriver.FindElement(_searchInput).Click();
+            return new PackagesScreenPageObject(_webDriver);
+        }
+
+        public string GetPackageIdFirstRow()
+        {          
+            return _webDriver.FindElement(_getIdOfFirstRowPackage).Text;
+        }
+
+        public PackageEditorScreenPageObject DeleteFlow()
+        {            
+            _webDriver.FindElement(_actionDeleteButton).Click();
+            Thread.Sleep(1000);
+            _webDriver.FindElement(_deleteYesButton).Click();
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+        public PackagesScreenPageObject WaitUntillLoaded()
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElements(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[3]")).FirstOrDefault());
+            return new PackagesScreenPageObject(_webDriver);
+        }
     }
 }
-
-
-
-

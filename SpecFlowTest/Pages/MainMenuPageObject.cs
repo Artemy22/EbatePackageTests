@@ -14,27 +14,27 @@ namespace SpecFlowTest
             WebDriver = webDriver;
         }
         
-        public IWebElement _mainLogo => WebDriver.FindElement(By.Id("menuLogo"));
-        public IWebElement _meinentanceHeader => WebDriver.FindElement(By.XPath("//*[@id=\"maintenance\"]"));
-        public IWebElement _pricingManagementHeader => WebDriver.FindElement(By.XPath("//*[@id=\"pricingManagement\"]"));
-        public IWebElement _financeHeader => WebDriver.FindElement(By.XPath("//*[@id=\"finance\"]"));
-        public IWebElement _reportingHeader => WebDriver.FindElement(By.XPath("//*[@id=\"reporting\"]"));
-        public IWebElement _version => WebDriver.FindElement(By.XPath("//*[@id=\"version\"]"));
-        public IWebElement _notifications => WebDriver.FindElement(By.XPath("//*[@id=\"notifications\"]"));
-        public IWebElement _help => WebDriver.FindElement(By.XPath("//*[@id=\"help\"]"));
-        public IWebElement _userMenu => WebDriver.FindElement(By.XPath("//*[@id=\"userMenu\"]"));
-        public IWebElement _signOutButton => WebDriver.FindElement(By.XPath("//*[@id=\"userDropdown\"]/li[3]/div[1]"));
+        public IWebElement MainLogo => WebDriver.FindElement(By.Id("menuLogo"));
+        public IWebElement MeinentanceHeader => WebDriver.FindElement(By.XPath("//*[@id=\"maintenance\"]"));
+        public IWebElement PricingManagementHeader => WebDriver.FindElement(By.XPath("//*[@id=\"pricingManagement\"]"));
+        public IWebElement FinanceHeader => WebDriver.FindElement(By.XPath("//*[@id=\"finance\"]"));
+        public IWebElement ReportingHeader => WebDriver.FindElement(By.XPath("//*[@id=\"reporting\"]"));
+        public IWebElement Version => WebDriver.FindElement(By.XPath("//*[@id=\"version\"]"));
+        public IWebElement Notifications => WebDriver.FindElement(By.XPath("//*[@id=\"notifications\"]"));
+        public IWebElement Help => WebDriver.FindElement(By.XPath("//*[@id=\"help\"]"));
+        public IWebElement UserMenu => WebDriver.FindElement(By.XPath("//*[@id=\"userMenu\"]"));
+        public IWebElement SignOutButton => WebDriver.FindElement(By.XPath("//*[@id=\"userDropdown\"]/li[3]/div[1]"));
 
-        public void ClickMainLogo() => _mainLogo.Click();
-        public void ClickMeinentanceHeader() => _meinentanceHeader.Click();
-        public void ClickPricingManagementHeader() => _pricingManagementHeader.Click();
-        public void ClickFinanceHeader() => _financeHeader.Click();
-        public void ClickReportingHeader() => _reportingHeader.Click();
-        public void ClickVersion() => _version.Click();
-        public void ClickNotifications() => _notifications.Click();
-        public void ClickHelp() => _help.Click();
-        public void ClickUserMenu() => _userMenu.Click();
-        public void ClickSignOutButton() => _signOutButton.Click();
+        public void ClickMainLogo() => MainLogo.Click();
+        public void ClickMeinentanceHeader() => MeinentanceHeader.Click();
+        public void ClickPricingManagementHeader() => PricingManagementHeader.Click();
+        public void ClickFinanceHeader() => FinanceHeader.Click();
+        public void ClickReportingHeader() => ReportingHeader.Click();
+        public void ClickVersion() => Version.Click();
+        public void ClickNotifications() => Notifications.Click();
+        public void ClickHelp() => Help.Click();
+        public void ClickUserMenu() => UserMenu.Click();
+        public void ClickSignOutButton() => SignOutButton.Click();
 
     }
 }

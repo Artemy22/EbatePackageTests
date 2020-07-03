@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SpecFlowTest
@@ -12,13 +15,16 @@ namespace SpecFlowTest
         public readonly By _BreadCrumbsHomeBtn = By.XPath("//*[@id=\"linkHome\"]");
         public readonly By _BreadCrumbPackageBtn = By.XPath("//*[@id=\"linkPackage\"]");
         public readonly By _editPackageBtn = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[1]/div/button");
-        public readonly By _tabsAgreements = By.XPath("//*[@id=\"k - tabstrip - tab - 0\"]");
-        public readonly By _tabsCriteria = By.XPath("//*[@id=\"k - tabstrip - tab - 1\"]");
-        public readonly By _tabsDocuments = By.XPath("//*[@id=\"k - tabstrip - tab - 2\"]");
-        public readonly By _tabsNotes = By.XPath("//*[@id=\"k - tabstrip - tab - 3\"]");
-        public readonly By _tabsAudit = By.XPath("//*[@id=\"k - tabstrip - tab - 4\"]");
+        public readonly By _tabsAgreements = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[1]/span");
+        public readonly By _tabsCriteria = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[2]/span");
+        public readonly By _tabsDocuments = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[3]/span");
+        public readonly By _tabsNotes = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[4]/span");
+        public readonly By _tabsAudit = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[5]/span");
         public readonly By _tabsAgreementsSearchInput = By.XPath("//*[@id=\"filterText\"]");
-        public readonly By _tabsAgreementsAddNewBtn = By.XPath("//*[@id=\"addPackage\"]");
+        public readonly By _tabsAgreementsAddNewBtnIfNoAgreementsExists = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-package-agreement/div[1]/button");
+        public readonly By _tabsAgreementsAddNewBtnIfAlreadyExistAnyAgreements = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-package-agreement/div/div[1]/button");
+
+
         public readonly By _tabsAgreementsChooseFirstRow = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[2]/label");
         public readonly By _tabsAgreementsOrderById = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[3]/a");
         public readonly By _tabsAgreementsOpenRebatesDropDownOfFirstRow = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[1]/a");
@@ -36,6 +42,12 @@ namespace SpecFlowTest
         public readonly By _tabsDocumentsUploadtNewDocumentBtn = By.XPath("//*[@id=\"action0\"]");
         public readonly By _tabsDocumentsDeleteDocumentBtn = By.XPath("//*[@id=\"action32\"]");
         public readonly By _tabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"action0\"]");
+        public readonly By _clickNoButtonAddCriteriaPopup = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
+        public readonly By _startDate = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/kendo-datepicker/span/kendo-dateinput/span/input");
+        public readonly By _endDate = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/kendo-datepicker/span/kendo-dateinput/span/input");
+        public readonly By _firstRowAgreementTab = By.XPath("//*[@id=\"gridAgreement\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[5]");
+        public readonly By FirstRowDescription = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-package-agreement/div/div[2]/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[5]");
+        public readonly By IsPopupCriteriaAppeared = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/kendo-dialog/div[2]");
 
 
         public PackageEditorScreenPageObject(IWebDriver webDriver)
@@ -44,7 +56,7 @@ namespace SpecFlowTest
         }
 
         public PackageEditorScreenPageObject ClickBreadCrumbsHomeBtn()
-        {         
+        {
             _webDriver.FindElement(_BreadCrumbsHomeBtn).Click();
             return new PackageEditorScreenPageObject(_webDriver);
         }
@@ -60,8 +72,8 @@ namespace SpecFlowTest
         }
         public PackageEditorScreenPageObject ClickTabsAgreements()
         {
-            _webDriver.FindElement(_tabsAgreements).Click();
-            return new PackageEditorScreenPageObject(_webDriver);
+           _webDriver.FindElement(_tabsAgreements).Click();
+           return new PackageEditorScreenPageObject(_webDriver);
         }
         public PackageEditorScreenPageObject ClickTabsAgreementsSearchInput()
         {
@@ -70,7 +82,14 @@ namespace SpecFlowTest
         }
         public PackageEditorScreenPageObject ClickTabsAgreementsAddNewBtn()
         {
-            _webDriver.FindElement(_tabsAgreementsAddNewBtn).Click();
+            try
+            {
+                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfNoAgreementsExists).Click();
+            }
+            catch
+            {
+                _webDriver.FindElement(_tabsAgreementsAddNewBtnIfAlreadyExistAnyAgreements).Click();
+            }
             return new PackageEditorScreenPageObject(_webDriver);
         }
         public PackageEditorScreenPageObject ClickTabsAgreementsChooseFirstRow()
@@ -178,6 +197,70 @@ namespace SpecFlowTest
             _webDriver.FindElement(_tabsNotesAddNewNoteBtn).Click();
             return new PackageEditorScreenPageObject(_webDriver);
         }
-    }
 
+        public PackageEditorScreenPageObject ClickNoButtonAddCriteria()
+        {
+            _webDriver.FindElement(_clickNoButtonAddCriteriaPopup).Click();
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+
+        public bool IfCriteriaPopupAppeared()
+        {
+            try
+            {
+                return _webDriver.FindElement(IsPopupCriteriaAppeared).Displayed;
+            }
+            catch (NoSuchElementException e)
+            {
+                return false;
+            }
+        }
+
+        public bool IsFirstRowAppeared()
+        {
+            if (_webDriver.FindElement(_firstRowAgreementTab).Displayed == true)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public bool IsPackageScreenOpened()
+        {
+            if (_webDriver.FindElement(_editPackageBtn).Displayed)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public string GetStartDateOfParentPackage()
+        {
+            string startDateBefore = _webDriver.FindElement(_startDate).GetAttribute("aria-valuetext");
+            var startDateAfter = startDateBefore;
+            startDateAfter = new string((from c in startDateAfter
+                                         where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+                                         select c
+                   ).ToArray());
+            return startDateAfter;
+        }
+        public string GetEndDateOfParentPackage()
+        {
+            string endDateBefore = _webDriver.FindElement(_endDate).GetAttribute("aria-valuetext");
+            var endDateAfter = endDateBefore;
+            endDateAfter = new string((from c in endDateAfter
+                                       where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+                                       select c
+                   ).ToArray());
+            return endDateAfter;
+        }
+
+        public PackageEditorScreenPageObject FindDescriptionUsingSearchInput(string description)
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_tabsAgreementsSearchInput).Click();
+            actions.SendKeys(description).Perform();
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+    }
 }

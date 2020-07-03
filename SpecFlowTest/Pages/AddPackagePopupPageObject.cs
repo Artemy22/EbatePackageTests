@@ -74,11 +74,47 @@ namespace SpecFlowTest
             _webDriver.FindElement(_AllCompanies).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
+        
+        public AddPackagePopupPageObject SetPeriodAnnual()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_periodInput).Click();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Annual']")).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+        public AddPackagePopupPageObject SetPeriodQuarterly()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_periodInput).Click();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Quarterly']")).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+        public AddPackagePopupPageObject SetPeriodBiAnnual()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_periodInput).Click();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Bi-Annual']")).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+        public AddPackagePopupPageObject SetPeriodCampaign()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_periodInput).Click();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Campaign']")).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+        public AddPackagePopupPageObject SetPeriodMultiYear()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_periodInput).Click();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Multi-Year']")).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
         public AddPackagePopupPageObject SetPeriodOngoing()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_periodInput).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Ongoing']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
 
@@ -154,42 +190,42 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.Enter).Perform(); 
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Trading Group']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         public AddPackagePopupPageObject SetAccountTypeParentAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Parent Account']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         public AddPackagePopupPageObject SetAccountTypeInvoiceAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Invoice Account']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         public AddPackagePopupPageObject SetAccountTypeDeliveryAccount()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Delivery Account']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         public AddPackagePopupPageObject SetAccountTypeDistributor()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Distributor']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         public AddPackagePopupPageObject SetAccountTypeLandlord()
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Landlord']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         
@@ -197,7 +233,7 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Merchant Distribution']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         
@@ -205,7 +241,7 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Manufacturer']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
         
@@ -213,7 +249,7 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_accountTypeDropDown).Click();
-            actions.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = 'Contractor']")).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
 
@@ -222,8 +258,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("qa").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBGB000004) qa_trad#3']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -233,8 +268,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("pa").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUK000010) Parent Account type']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -245,14 +279,6 @@ namespace SpecFlowTest
             actions.SendKeys("art").Perform();
             _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000014) Artem Inc.']")).Click();
 
-            //SelectElement selectElement = new SelectElement(_webDriver.FindElement(By.XPath("//*[@id=\"companiesSearch\"]/span/kendo-searchbar")));
-            //selectElement.SelectByValue("(NGBUnited Kingdom000014) Artem Inc.");
-
-            //actions.SendKeys("(NGBUnited Kingdom000014) Artem Inc.").Perform();
-            //Thread.Sleep(500);
-            //actions.SendKeys(Keys.ArrowDown).Perform();
-            //actions.SendKeys(Keys.Enter).Perform();
-
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -261,8 +287,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("del").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000011) Delivery Account']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -271,8 +296,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("dis").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000015) Distributor']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -281,8 +305,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("land").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000016) Landlord']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -291,8 +314,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("merch").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000017) Merchant Distribution']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -301,8 +323,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("man").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000018) Manufacturer']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
@@ -311,8 +332,7 @@ namespace SpecFlowTest
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("cont").Perform();
-            Thread.Sleep(500);
-            actions.SendKeys(Keys.ArrowDown + Keys.Enter).Perform();
+            _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000019) Contractor']")).Click();
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }

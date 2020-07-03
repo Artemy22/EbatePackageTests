@@ -1,9 +1,9 @@
 ﻿Feature: EBD-181-Create-A-Package
 	Creation invoice packages flow 
 
-@mytag
+@testCasesFromTestBoard
 Scenario: Create packages
-	Given Open Chrome browser
+	Given Opened Chrome browser
 	And Navigate to Pricing Management > Packages
 	And Click the Add button
 	And Select a company type Customer
@@ -12,5 +12,3 @@ Scenario: Create packages
 	And Complete the remaining fields
 	And Click the Save button
 	Then Check if a package has been created
-	
-	

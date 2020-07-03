@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Threading;
 using TechTalk.SpecFlow;
@@ -13,7 +14,7 @@ namespace SpecFlowTest.Steps
         private IWebDriver driver;
         string description;
 
-        [Given(@"Open Chrome browser")]
+        [Given(@"Opened Chrome browser")]
         public void GivenOpenChromeBrowser()
         {            
             driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
@@ -31,7 +32,7 @@ namespace SpecFlowTest.Steps
             MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
             mainMenuPageObject.ClickPricingManagementHeader();
             PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
-            priceManagmentDropDownPageObject.ClickPackages();            
+            priceManagmentDropDownPageObject.ClickPackages();
         }
 
         [Given(@"Click the Add button")]
@@ -86,14 +87,13 @@ namespace SpecFlowTest.Steps
         [Then(@"Check if a package has been created")]
         public void ThenCheckIfPackageIsCreated()
         {
+            Actions actions = new Actions(driver);
             var packagesScreen = new PackagesScreenPageObject(driver);
-            packagesScreen.ClickOrderById();
-            Thread.Sleep(100);
-            packagesScreen.ClickOrderById();
-            Thread.Sleep(1000);
-
+            packagesScreen.ClickSearchInput();
+            actions.SendKeys(description + Keys.Enter).Perform();
             var actualResult = driver.FindElement(By.XPath("//*[@id=\"gridPackageOverview\"]/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[6]")).Text;
-            Assert.AreEqual(description, actualResult);
+            Assert.IsNotNull(actualResult);
+            driver.Close();
         }
     }
 }

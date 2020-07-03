@@ -1,9 +1,13 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Linq;
 
 namespace SpecFlowTest
 {
     class LoginTabPageObject
     {
+        private IWebDriver _webDriver;
 
         public IWebDriver WebDriver { get; }
 
@@ -22,7 +26,12 @@ namespace SpecFlowTest
 
 
         //public void ClickEmailInput() => _emailInput.Click();
-
+        public bool Waiter(int seconds, IWebElement element)
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+            return true;            
+        }
         public LoginTabPageObject Login(string email, string password)
         {
             _emailInput.SendKeys(email);
@@ -31,8 +40,13 @@ namespace SpecFlowTest
         }
 
         public void ClickSaveBtn() => _saveButton.Click();
-        public void ClickTenant() => _tenantDropDown.Click();
+
+        public void ClickTenant() {
+            Waiter(10, _tenantDropDown);
+            _tenantDropDown.Click(); 
+        }
         public void ClickSaveBtnTenant() => _saveBtnTenant.Click();
+
         public void ChooseSecondTenant() => _saveBtnTenant.Click(); // only for Demo
 
         public bool IsUserDropDownExist() => _userMenu.Displayed;

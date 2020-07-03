@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -24,7 +25,13 @@ namespace SpecFlowTest
         {
             _webDriver = webDriver;
         }
-           
+
+        public string GetDescription()
+        {            
+            string getDerscr = _webDriver.FindElement(_descriptionInput).GetAttribute("value");
+            return getDerscr;
+        }
+
         public ModifyPackagePopupPageObject SetNewStartDate(string newStartDate)
         {
             Actions actions = new Actions(_webDriver);
@@ -72,5 +79,14 @@ namespace SpecFlowTest
             _webDriver.FindElement(_cancelBtn).Click();
             return new ModifyPackagePopupPageObject(_webDriver);
         }
+        public string ChangeDescription()
+        {
+            _webDriver.FindElement(_descriptionInput).Click();
+            Actions actions = new Actions(_webDriver);
+            Thread.Sleep(300);
+            actions.SendKeys(Keys.End + " Changed").Perform();
+            string getDerscrChanged = _webDriver.FindElement(_descriptionInput).GetAttribute("value");
+            return getDerscrChanged;
+        }        
     }
 }

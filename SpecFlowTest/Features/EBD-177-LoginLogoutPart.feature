@@ -1,7 +1,7 @@
 ﻿Feature: EBD-177-LoginLogoutPart
 	Login / logout flow
 
-@mytag
+@testCasesFromTestBoard
 Scenario: Go through Login flow
 	Given Open e-bate
 	And Login to e-bate
