@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,20 @@ namespace SpecFlowTest
         public readonly By TabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"gridDealNotes\"]/div/div[2]/div/div[2]");
 
 
-
+        private AddRebatePopup Waiter(int seconds, By element)
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
+            try
+            {
+                wait.Until(d => d.FindElements(element).FirstOrDefault());
+                return new AddRebatePopup(_webDriver);
+            }
+            catch
+            {
+                var neededElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+                return new AddRebatePopup(_webDriver);
+            }
+        }
 
         public AgreementEditorPage(IWebDriver webDriver)
         {
@@ -228,7 +242,7 @@ namespace SpecFlowTest
 
         public bool CheckIfRebateAdded(string expectedResult)
         {
-            IsFirstRowAppeared();
+            Waiter(10, TabsRebateFirstRowCheckBox);
             _webDriver.FindElement(TabsRebateOrderById).Click();
             IsFirstRowAppeared();
             Thread.Sleep(1000);
