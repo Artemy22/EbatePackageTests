@@ -3,13 +3,13 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
-
+using System.Threading;
 
 namespace SpecFlowTest
 {
     class AddRebatePopup
     {
-        private readonly IWebDriver _webDriver;        
+        private readonly IWebDriver _webDriver;
 
         public readonly By CalculationTypeDropDown = By.Id("calculationType");
         public readonly By CalculateAgainstDropDown = By.Id("priceTypeId");
@@ -53,7 +53,7 @@ namespace SpecFlowTest
         public AddRebatePopup(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-        }   
+        }
 
         public AddRebatePopup SetBudget()
         {
@@ -111,7 +111,7 @@ namespace SpecFlowTest
         public AddRebatePopup ChooseCalculationTypeStandardPercOfTurnover()
         {
             Actions actions = new Actions(_webDriver);
-            Waiter(15, CompanyInputInactive); 
+            Waiter(15, CompanyInputInactive);
             _webDriver.FindElement(CalculationTypeDropDown).Click();
             _webDriver.FindElement(By.XPath("//ul/li[text() = 'Standard % of Turnover']")).Click(); // add rates popup appeared - SecondRatesPopupRateInputPercentage2
             return new AddRebatePopup(_webDriver);
@@ -174,8 +174,8 @@ namespace SpecFlowTest
         }
         public AddRebatePopup ChooseCalculationTypeProductLevelValue()
         {
-            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(CalculationTypeDropDown).Click();
+            Thread.Sleep(500);
             _webDriver.FindElement(By.XPath("//ul/li[text() = 'Product Level Value']")).Click();  // without popup
             return new AddRebatePopup(_webDriver);
         }
@@ -215,10 +215,87 @@ namespace SpecFlowTest
             return new AddRebatePopup(_webDriver);
         }
 
+        public void ChooseCalculationType(RebateTypes name)
+        {
+            switch (name)
+            {
+                case RebateTypes.StandardValuePerUnit:
+                    ChooseCalculationTypeStandardValuePerUnit();
+                    break;
+                case RebateTypes.StandardPercOfTurnover:
+                     ChooseCalculationTypeStandardPercOfTurnover();
+                    break;
+                case RebateTypes.TieredPercOfTurnoverRetro:
+                     ChooseCalculationTypeTieredPercOfTurnoverRetro();
+                    break;
+                case RebateTypes.TieredValuePerUnitRetro:
+                     ChooseCalculationTypeTieredValuePerUnitRetro();
+                    break;
+                case RebateTypes.GrowthPercOfTurnover:
+                     ChooseCalculationTypeGrowthPercOfTurnover();
+                    break;
+                case RebateTypes.GrowthValuePerUnit:
+                     ChooseCalculationTypeGrowthValuePerUnit();
+                    break;
+                case RebateTypes.ProductLevelPerc:
+                     ChooseCalculationTypeProductLevelPerc();
+                    break;
+                case RebateTypes.TieredPercOfTurnoverNonRetro:
+                     ChooseCalculationTypeTieredPercOfTurnoverNonRetro();
+                    break;
+                case RebateTypes.TieredValuePerUnitNonRetro:
+                     ChooseCalculationTypeTieredValuePerUnitNonRetro();
+                    break;
+                case RebateTypes.ProductLevelFOC:
+                     ChooseCalculationTypeProductLevelFOC();
+                    break;
+                case RebateTypes.ProductLevelValue:
+                     ChooseCalculationTypeProductLevelValue();
+                    break;
+                case RebateTypes.ProductLevelFOCTiered:
+                     ChooseCalculationTypeProductLevelFOCTiered();
+                    break;
+                case RebateTypes.BuyGetCheapestFree:
+                     ChooseCalculationTypeBuyGetCheapestFree();
+                    break;
+                case RebateTypes.BuyXGetYFree:
+                     ChooseCalculationTypeBuyXGetYFree();
+                    break;
+                case RebateTypes.Fee:
+                    ChooseCalculationTypeFee();
+                    break;
+                case RebateTypes.TieredOneOffRebate:
+                    ChooseCalculationTypeTieredOneOffRebate();
+                    break;
+            }
+        }
+
+        public enum RebateTypes
+        {
+            StandardValuePerUnit,
+            StandardPercOfTurnover,
+            TieredPercOfTurnoverRetro,
+            TieredValuePerUnitRetro,
+            GrowthPercOfTurnover,
+            GrowthValuePerUnit,
+            ProductLevelPerc,
+            TieredPercOfTurnoverNonRetro,
+            TieredValuePerUnitNonRetro,
+            ProductLevelFOC,
+            ProductLevelValue,
+            ProductLevelFOCTiered,
+            BuyGetCheapestFree,
+            BuyXGetYFree,
+            Fee,
+            TieredOneOffRebate
+        }
+
+
+
         public AddRebatePopup ChooseCalculateAgainstInvoicePrice()
         {
-            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(CalculateAgainstDropDown).Click();
+            Thread.Sleep(500);
             string invoicePrice = "//ul/li[text() = 'Invoice price']";
             Waiter(15, By.XPath(invoicePrice));
             _webDriver.FindElement(By.XPath(invoicePrice)).Click();
@@ -254,7 +331,7 @@ namespace SpecFlowTest
             _webDriver.FindElement(By.XPath("//ul/li[text() = 'Quarterly']")).Click();
             return new AddRebatePopup(_webDriver);
         }
-        
+
         public AddRebatePopup ChoosePaymentFrequencyBiAnnual()
         {
             Actions actions = new Actions(_webDriver);
@@ -342,6 +419,6 @@ namespace SpecFlowTest
             _webDriver.FindElement(SecondRatesPopupRateInputPercentage2).Click();
             actions.SendKeys("1").Perform();
             return new AddRebatePopup(_webDriver);
-        }        
+        }
     }
 }

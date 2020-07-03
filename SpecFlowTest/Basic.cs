@@ -15,6 +15,7 @@ namespace SpecFlowTest
             var loginTenantnPage = new LoginTenantTabPageObject(driver);
             loginPage.Login(creds.Email, creds.Password);
             loginPage.ClickSaveBtn();
+
             loginTenantnPage.ChooseFirstTenant();
             return new MainMenuPageObject(driver);
         }

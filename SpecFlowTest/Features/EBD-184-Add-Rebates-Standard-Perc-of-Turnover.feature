@@ -1,7 +1,5 @@
-﻿Feature: EBD-184-Add-Rebates
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+﻿Feature: EBD-184-Add-Rebates-Standard-Perc-of-Turnover
+	Add a rebate flow
 
 @testCasesFromTestBoard
 Scenario: Add Standard % of Turnover rebate

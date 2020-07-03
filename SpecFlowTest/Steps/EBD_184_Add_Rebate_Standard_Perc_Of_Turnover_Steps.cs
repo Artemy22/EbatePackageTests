@@ -4,25 +4,20 @@ using OpenQA.Selenium.Interactions;
 using System;
 using System.Threading;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace SpecFlowTest.Steps
 {
     [Binding]
-    public class EBD_184_Add_RebatesSteps
+    public class EBD_184_Add_Rebate_Standard_Perc_Of_Turnover_Steps
     {
-
         private static readonly IWebDriver driver = WebDriverFactory.CreateWebDriver(WebBrowser.Chrome);
         private readonly Basic basic = new Basic();
-        private readonly Actions action = new Actions(driver);
         private readonly MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
-        private readonly PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
         private readonly PriceManagmentDropDownPageObject priceManagmentDropDownPageObject = new PriceManagmentDropDownPageObject(driver);
-        private readonly PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
-        private readonly AddAgreementPopupPageObject addAgreementPopupPageObject = new AddAgreementPopupPageObject(driver);
         private readonly AgreementsScreenPageObject agreementsScreenPageObject = new AgreementsScreenPageObject(driver);
         private readonly AddRebatePopup addRebatePopup = new AddRebatePopup(driver);
         private readonly AgreementEditorPage agreementEditorPage = new AgreementEditorPage(driver);
-        string description;
         string expectedResult;
 
         [Given(@"I open Chrome")]
@@ -57,9 +52,9 @@ namespace SpecFlowTest.Steps
         }
 
         [Then(@"I choose Calculation Type -> Standard % of Turnover")]
-        public void ThenIChooseCalculationType_StandardOfTurnover()
+         public void ThenIChooseCalculationType_StandardOfTurnover()
         {
-            addRebatePopup.ChooseCalculationTypeStandardPercOfTurnover();
+        addRebatePopup.ChooseCalculationTypeStandardPercOfTurnover();
         }
 
         [Then(@"I choose Calculate Against -> Invoice price")]

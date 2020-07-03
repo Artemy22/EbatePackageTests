@@ -212,6 +212,20 @@ namespace SpecFlowTest
             return new AgreementEditorPage(_webDriver);
         }
 
+        public RebateEditorPage ChooseAndGoIntoAddedRebate()
+        {
+            IsFirstRowAppeared();
+            _webDriver.FindElement(TabsRebateOrderById).Click();
+            IsFirstRowAppeared();
+            Thread.Sleep(1000);
+            _webDriver.FindElement(TabsRebateOrderById).Click();
+            Thread.Sleep(2000);
+            ClickTabsRebateChooseFirstRow();
+            _webDriver.FindElement(TabsRebateActionView).Click();
+            return new RebateEditorPage(_webDriver);
+
+        }
+
         public bool CheckIfRebateAdded(string expectedResult)
         {
             IsFirstRowAppeared();
@@ -225,6 +239,7 @@ namespace SpecFlowTest
             Assert.AreEqual(expectedResult, actualResult);
             return true;
         }
+
         public string GetDescription()
         {
             return _webDriver.FindElement(TabsRebateFirstRowDescription).Text;
