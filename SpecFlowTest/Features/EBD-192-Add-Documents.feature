@@ -7,7 +7,7 @@ Scenario: Add document to a package
 	And Navigate to Packages
 	Then Choose a Package 
 	And Add a document to chosen package
-	Then Check if it is added
+	Then Check if it is added to package
 
 
 Scenario: Add document to an agreement
@@ -15,7 +15,7 @@ Scenario: Add document to an agreement
 	And Navigate to agreements
 	Then Choose a agreement 
 	And Add a document to chosen agreement
-	Then Check if it is added
+	Then Check if it is added to agreement
 
 
 Scenario: Add document to a rebate
@@ -23,4 +23,4 @@ Scenario: Add document to a rebate
 	And Navigate to rebate
 	Then Choose a rebate 
 	And Add a document to chosen rebate
-	Then Check if it is added	
+	Then Check if it is added to rebate

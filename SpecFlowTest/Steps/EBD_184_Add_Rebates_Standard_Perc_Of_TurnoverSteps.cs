@@ -38,8 +38,6 @@ namespace SpecFlowTest.Steps
             agreementsScreenPageObject.FindSeleniumAgreementWithRebates();
             agreementsScreenPageObject.SelectFirstRow();
             agreementsScreenPageObject.ClickActionViewButton();
-
-
         }
 
         [Then(@"Click  on ADD  button to add new rebate")]

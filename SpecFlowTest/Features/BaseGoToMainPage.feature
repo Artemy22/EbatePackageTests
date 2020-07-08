@@ -2,5 +2,5 @@
 	Use it for go through the login flow to get Main Page
 
 @mytag
-Scenario: Open Chrome browser
+Scenario: Go to Main page
 	Given Open Chrome Browser

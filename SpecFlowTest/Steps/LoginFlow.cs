@@ -22,7 +22,7 @@ namespace SpecFlowTest.Steps
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
             loginTabPageObject = new LoginTabPageObject(driver);
-        }
+        }        
 
         [Given(@"Login to e-bate")]
         public void GivenIEnterCredentialsAndClickOnSaveBtn()
@@ -52,6 +52,7 @@ namespace SpecFlowTest.Steps
         public void ThenIShouldSeeUserSDrop_DownFromTheUpperRight()
         {
             Assert.IsTrue(loginTabPageObject.IsUserDropDownExist());
+            driver.Close();
         }
         
     }

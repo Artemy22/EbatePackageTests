@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -27,7 +28,7 @@ namespace SpecFlowTest
 
         public LoginTenantTabPageObject ChooseFirstTenant()
         {
-            Waiter(10, _tenantDropDown);
+            Thread.Sleep(1000);
             _webDriver.FindElement(_tenantDropDown).Click();
             _webDriver.FindElement(_saveButton).Click();
 
