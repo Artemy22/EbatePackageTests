@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace SpecFlowTest
         public readonly By TabsRebate = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[1]");
         public readonly By TabsCriteria = By.XPath("//ul/li[text() = 'Criteria']");
         public readonly By TabsEventBasedIncentives = By.XPath("//ul/li[text() = 'Event-Based Incentives']");
-        public readonly By TabsDocuments = By.XPath("//ul/li[text() = 'Documents']");
+        public readonly By TabsDocuments = By.XPath("/html/body/app-home/div/div/div[2]/app-agreement/app-agreement-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/ul/li[4]");
         public readonly By TabsNotes = By.XPath("//ul/li[text() = 'Notes']");
         public readonly By TabsAudit = By.XPath("//ul/li[text() = 'Audit']");
         public readonly By TabsRebateSearchInput = By.Id("filterText");
@@ -44,10 +45,29 @@ namespace SpecFlowTest
         public readonly By TabsEventBasedIncentivesRequestButton = By.Id("//*[@id=\"gridAgreementRebates\"]/div/div[2]/div/div[5]");
         public readonly By TabsDocumentsUploadtNewBtn = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/div/div[3]");
         public readonly By TabsDocumentsDeleteBtn = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/div/div[2]");
+        public readonly By TabsDocumentsAddDocumentPopupChooseFileButton = By.Id("txtFile");
+        public readonly By TabsDocumentsAddDocumentPopupDescriptionInput = By.Id("txtDescription");
+        public readonly By TabsDocumentsAddDocumentPopupUploadButton = By.Id("save");
+        public readonly By TabsDocumentsCheckIfDocumentAdded = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-settlement-documents-overview/div/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[5]");
+        public readonly By TabsDocumentsOrderByDescription = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[5]");
+
+
         public readonly By TabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"gridDealNotes\"]/div/div[2]/div/div[2]");
 
-
-
+        private AddRebatePopup Waiter(int seconds, By element)
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
+            try
+            {
+                wait.Until(d => d.FindElements(element).FirstOrDefault());
+                return new AddRebatePopup(_webDriver);
+            }
+            catch
+            {
+                var neededElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+                return new AddRebatePopup(_webDriver);
+            }
+        }
 
         public AgreementEditorPage(IWebDriver webDriver)
         {
@@ -228,7 +248,7 @@ namespace SpecFlowTest
 
         public bool CheckIfRebateAdded(string expectedResult)
         {
-            IsFirstRowAppeared();
+            Waiter(10, TabsRebateFirstRowCheckBox);
             _webDriver.FindElement(TabsRebateOrderById).Click();
             IsFirstRowAppeared();
             Thread.Sleep(1000);
@@ -243,6 +263,40 @@ namespace SpecFlowTest
         public string GetDescription()
         {
             return _webDriver.FindElement(TabsRebateFirstRowDescription).Text;
+        }
+
+        public AgreementEditorPage ChooseDocumentFile()
+        {
+            IWebElement fileInput = _webDriver.FindElement(TabsDocumentsAddDocumentPopupChooseFileButton);
+            fileInput.SendKeys("C:/Users/ovly/Downloads/docForTestDoNotDelete.pdf");
+            return new AgreementEditorPage(_webDriver);
+        }
+        public string AddDocumentPopupSetDescription(string description)
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(TabsDocumentsAddDocumentPopupDescriptionInput).Click();
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string result = description + $" {unixTimestamp}";
+            actions.SendKeys(result).Perform();
+            return result;
+        }
+        public AgreementEditorPage AddDocumentPopupClickUploadButton()
+        {
+            _webDriver.FindElement(TabsDocumentsAddDocumentPopupUploadButton).Click();
+            return new AgreementEditorPage(_webDriver);
+        }
+
+        public string IfDocumentAdded()
+        {
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Thread.Sleep(1000);
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Thread.Sleep(1000);
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            string actualResult = _webDriver.FindElement(_tabsDocumentsCheckIfDocumentAdded).Text;
+            return actualResult;
         }
     }
 }

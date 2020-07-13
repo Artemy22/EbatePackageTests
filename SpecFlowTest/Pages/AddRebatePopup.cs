@@ -34,8 +34,10 @@ namespace SpecFlowTest
         public readonly By SecondRatesPopupTierPercentageInput = By.Id("numScale");
         public readonly By SecondRatesPopupRebateInput = By.Id("numValue");
         public readonly By CompanyInputInactive = By.Id("companyName");
+        readonly Random rnd = new Random();
 
-        public AddRebatePopup Waiter(int seconds, By element)
+
+        private AddRebatePopup Waiter(int seconds, By element)
         {
             var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
             try
@@ -202,8 +204,8 @@ namespace SpecFlowTest
         }
         public AddRebatePopup ChooseCalculationTypeTieredOneOffRebate()
         {
-            Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(CalculationTypeDropDown).Click();
+            Thread.Sleep(500);
             _webDriver.FindElement(By.XPath("//ul/li[text() = 'Tiered one-off Rebate']")).Click();
             return new AddRebatePopup(_webDriver);
         }
@@ -223,43 +225,43 @@ namespace SpecFlowTest
                     ChooseCalculationTypeStandardValuePerUnit();
                     break;
                 case RebateTypes.StandardPercOfTurnover:
-                     ChooseCalculationTypeStandardPercOfTurnover();
+                    ChooseCalculationTypeStandardPercOfTurnover();
                     break;
                 case RebateTypes.TieredPercOfTurnoverRetro:
-                     ChooseCalculationTypeTieredPercOfTurnoverRetro();
+                    ChooseCalculationTypeTieredPercOfTurnoverRetro();
                     break;
                 case RebateTypes.TieredValuePerUnitRetro:
-                     ChooseCalculationTypeTieredValuePerUnitRetro();
+                    ChooseCalculationTypeTieredValuePerUnitRetro();
                     break;
                 case RebateTypes.GrowthPercOfTurnover:
-                     ChooseCalculationTypeGrowthPercOfTurnover();
+                    ChooseCalculationTypeGrowthPercOfTurnover();
                     break;
                 case RebateTypes.GrowthValuePerUnit:
-                     ChooseCalculationTypeGrowthValuePerUnit();
+                    ChooseCalculationTypeGrowthValuePerUnit();
                     break;
                 case RebateTypes.ProductLevelPerc:
-                     ChooseCalculationTypeProductLevelPerc();
+                    ChooseCalculationTypeProductLevelPerc();
                     break;
                 case RebateTypes.TieredPercOfTurnoverNonRetro:
-                     ChooseCalculationTypeTieredPercOfTurnoverNonRetro();
+                    ChooseCalculationTypeTieredPercOfTurnoverNonRetro();
                     break;
                 case RebateTypes.TieredValuePerUnitNonRetro:
-                     ChooseCalculationTypeTieredValuePerUnitNonRetro();
+                    ChooseCalculationTypeTieredValuePerUnitNonRetro();
                     break;
                 case RebateTypes.ProductLevelFOC:
-                     ChooseCalculationTypeProductLevelFOC();
+                    ChooseCalculationTypeProductLevelFOC();
                     break;
                 case RebateTypes.ProductLevelValue:
-                     ChooseCalculationTypeProductLevelValue();
+                    ChooseCalculationTypeProductLevelValue();
                     break;
                 case RebateTypes.ProductLevelFOCTiered:
-                     ChooseCalculationTypeProductLevelFOCTiered();
+                    ChooseCalculationTypeProductLevelFOCTiered();
                     break;
                 case RebateTypes.BuyGetCheapestFree:
-                     ChooseCalculationTypeBuyGetCheapestFree();
+                    ChooseCalculationTypeBuyGetCheapestFree();
                     break;
                 case RebateTypes.BuyXGetYFree:
-                     ChooseCalculationTypeBuyXGetYFree();
+                    ChooseCalculationTypeBuyXGetYFree();
                     break;
                 case RebateTypes.Fee:
                     ChooseCalculationTypeFee();
@@ -417,7 +419,20 @@ namespace SpecFlowTest
         {
             Actions actions = new Actions(_webDriver);
             _webDriver.FindElement(SecondRatesPopupRateInputPercentage2).Click();
-            actions.SendKeys("1").Perform();
+            int int0to99 = rnd.Next(1, 99);
+            actions.SendKeys($"{int0to99}").Perform();
+            return new AddRebatePopup(_webDriver);
+        }
+
+        public AddRebatePopup AddRatesPopupSetTierAndRebateValues()
+        {
+            Actions actions = new Actions(_webDriver);
+            int int0to99 = rnd.Next(1, 99);
+            Waiter(10, SecondRatesPopupTierPercentageInput);
+            _webDriver.FindElement(SecondRatesPopupTierPercentageInput).Click();
+            actions.SendKeys($"{int0to99}").Perform();
+            _webDriver.FindElement(SecondRatesPopupRebateInput).Click();
+            actions.SendKeys($"{int0to99}").Perform();
             return new AddRebatePopup(_webDriver);
         }
     }

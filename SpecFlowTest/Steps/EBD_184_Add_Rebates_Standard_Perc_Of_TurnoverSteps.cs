@@ -20,7 +20,7 @@ namespace SpecFlowTest.Steps
         private readonly AgreementEditorPage agreementEditorPage = new AgreementEditorPage(driver);
         string expectedResult;
 
-        [Given(@"I open Chrome")]
+        [Given(@"I open  Chrome")]
         public void GivenIOpenChrome()
         {
             driver.Manage().Window.Maximize();
@@ -28,7 +28,7 @@ namespace SpecFlowTest.Steps
             driver.Navigate().GoToUrl("https://app.test.e-bate.net/login");
         }
 
-        [Then(@"Navigate to test agreement")]
+        [Then(@"Navigate  to test agreement")]
         public void ThenNavigateToTestAgreement()
         {
             basic.LoginFlow(driver);
@@ -38,11 +38,9 @@ namespace SpecFlowTest.Steps
             agreementsScreenPageObject.FindSeleniumAgreementWithRebates();
             agreementsScreenPageObject.SelectFirstRow();
             agreementsScreenPageObject.ClickActionViewButton();
-
-
         }
 
-        [Then(@"Click on ADD  button to add new rebate")]
+        [Then(@"Click  on ADD  button to add new rebate")]
         public void ThenClickOnADDButtonToAddNewRebate()
         {
             agreementEditorPage.ClickTabsRebate();
@@ -51,19 +49,19 @@ namespace SpecFlowTest.Steps
             Thread.Sleep(2500);
         }
 
-        [Then(@"I choose Calculation Type -> Standard % of Turnover")]
-         public void ThenIChooseCalculationType_StandardOfTurnover()
+        [Then(@"I choose  Calculation Type -> Standard % of Turnover")]
+        public void ThenIChooseCalculationType_StandardOfTurnover()
         {
-        addRebatePopup.ChooseCalculationTypeStandardPercOfTurnover();
+            addRebatePopup.ChooseCalculationTypeStandardPercOfTurnover();
         }
 
-        [Then(@"I choose Calculate Against -> Invoice price")]
+        [Then(@"I choose  Calculate Against -> Invoice price")]
         public void ThenIChooseCalculateAgainst_InvoicePrice()
         {
             addRebatePopup.ChooseCalculateAgainstInvoicePrice();
         }
 
-        [Then(@"I fill out some description")]
+        [Then(@"I  fill out some description")]
         public void ThenIFillOutSomeDescription()
         {
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -71,50 +69,49 @@ namespace SpecFlowTest.Steps
             addRebatePopup.SetDescription(expectedResult);
         }
 
-        [Then(@"I Choose Category -> QA_Category")]
+        [Then(@"I  Choose Category -> QA_Category")]
         public void ThenIChooseCategory_QA_Category()
         {
             addRebatePopup.ChooseCategory();
         }
 
-        [Then(@"Set Budget and Target")]
+        [Then(@"Set  Budget and Target")]
         public void ThenSetBudgetAndTarget()
         {
-            addRebatePopup.SetTarget();
-            addRebatePopup.SetBudget();
+            addRebatePopup.SetTarget().SetBudget();
         }
 
-        [Then(@"I choose Payment Frequency -> Ongoing")]
+        [Then(@"I  choose Payment Frequency -> Ongoing")]
         public void ThenIChoosePaymentFrequency_Ongoing()
         {
             addRebatePopup.ChoosePaymentFrequencyOngoing();
         }
 
-        [Then(@"I choose Currency -> Pound Sterling")]
+        [Then(@"I  choose Currency -> Pound Sterling")]
         public void ThenIChooseCurrency_PoundSterling()
         {
             addRebatePopup.ChooseCurrencyPoundSterling();
         }
 
-        [When(@"I click on SAVE button")]
+        [When(@"I  click on SAVE button")]
         public void WhenIClickOnSAVEButton()
         {
             addRebatePopup.ClickSaveButton();
         }
 
-        [Then(@"Second popup is opened and I set Percentage")]
+        [Then(@"Second  popup is opened and I set Percentage")]
         public void ThenSecondPopupIsOpenedAndISetPercentage()
         {
             addRebatePopup.AddRatesPopupSetPercentage();
         }
 
-        [When(@"I click on SAVE button one more time")]
+        [When(@"I  click on SAVE button one more time")]
         public void WhenIClickOnSAVEButtonOneMoreTime()
         {
             addRebatePopup.ClickSaveButton();
         }
 
-        [Then(@"My rebate is presented in Grid")]
+        [Then(@"My  rebate is presented in Grid")]
         public void ThenMyRebateIsPresentedInGrid()
         {
             agreementEditorPage.IsFirstRowAppeared();

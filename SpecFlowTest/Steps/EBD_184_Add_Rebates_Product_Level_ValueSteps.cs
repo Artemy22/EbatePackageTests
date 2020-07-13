@@ -43,61 +43,61 @@ namespace SpecFlowTest.Steps
         [Then(@"I Click on ADD  button to add new rebate")]
         public void ThenIClickOnADDButtonToAddNewRebate()
         {
-           // agreementEditorPage.ClickTabsRebate();
+            agreementEditorPage.ClickTabsRebate();
             Thread.Sleep(2000);
-            //agreementEditorPage.ClickTabsRebateAddNewBtn();
+            agreementEditorPage.ClickTabsRebateAddNewBtn();
             Thread.Sleep(2500);
         }
         
         [Then(@"I choose Calculation Type -> Product Level Value")]
         public void ThenIChooseCalculationType_ProductLevelValue()
         {
-            //addRebatePopup.ChooseCalculationTypeProductLevelValue();
+            addRebatePopup.ChooseCalculationTypeProductLevelValue();
         }
 
         [Then(@"I choose Calculate Against ->  Invoice price")]
         public void ThenIChooseCalculateAgainst_InvoicePrice()
         {
-            //addRebatePopup.ChooseCalculateAgainstInvoicePrice();
+            addRebatePopup.ChooseCalculateAgainstInvoicePrice();
         }
 
         [Then(@"I fill out some  description")]
         public void ThenIFillOutSomeDescription()
         {
-            //Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            //expectedResult = "Product Level Value + Invoice price. Selenium. Timestamp: " + unixTimestamp;
-            //addRebatePopup.SetDescription(expectedResult);
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            expectedResult = "Product Level Value + Invoice price. Selenium. Timestamp: " + unixTimestamp;
+            addRebatePopup.SetDescription(expectedResult);
         }
         
         [Then(@"I Choose Category ->  QA_Category")]
         public void ThenIChooseCategory_QA_Category()
         {
-            //addRebatePopup.ChooseCategory();
+            addRebatePopup.ChooseCategory();
         }
 
         [Then(@"Set Budget  and Target")]
         public void ThenSetBudgetAndTarget()
         {
-            //addRebatePopup.SetTarget();
-            //addRebatePopup.SetBudget();
+            addRebatePopup.SetTarget();
+            addRebatePopup.SetBudget();
         }
         
         [Then(@"I choose Payment  Frequency -> Ongoing")]
         public void ThenIChoosePaymentFrequency_Ongoing()
         {
-            //addRebatePopup.ChoosePaymentFrequencyOngoing();
+            addRebatePopup.ChoosePaymentFrequencyOngoing();
         }
 
         [Then(@"I choose Currency  -> Pound Sterling")]
         public void ThenIChooseCurrency_PoundSterling()
         {
-            //addRebatePopup.ChooseCurrencyPoundSterling();
+            addRebatePopup.ChooseCurrencyPoundSterling();
         }
 
         [Then(@"I click  on SAVE button")]
         public void ThenIClickOnSAVEButton()
         {
-            //addRebatePopup.ClickSaveButton();
+            addRebatePopup.ClickSaveButton();
         }
 
         [Then(@"I choose the rebate and open it")]

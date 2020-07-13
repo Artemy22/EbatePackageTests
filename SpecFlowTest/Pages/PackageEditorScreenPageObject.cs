@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SpecFlowTest
 {
@@ -39,8 +41,15 @@ namespace SpecFlowTest
         public readonly By _tabsCriteriaAddNewBtnPlusSign = By.XPath("//*[@id=\"btnNew\"]");
         public readonly By _tabsCriteriaDeleteBtn = By.XPath("//*[@id=\"btnDelete\"]");
         public readonly By _tabsDocumentsGenerateTradeAgreementBtn = By.XPath("//*[@id=\"gridAgreementFiles\"]/div/div[2]/div/div[2]");
-        public readonly By _tabsDocumentsUploadtNewDocumentBtn = By.XPath("//*[@id=\"action0\"]");
+        public readonly By _tabsDocumentsUploadtNewDocumentBtn = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/div/div[3]");
         public readonly By _tabsDocumentsDeleteDocumentBtn = By.XPath("//*[@id=\"action32\"]");
+        public readonly By _tabsDocumentsAddDocumentPopupChooseFileButton = By.Id("txtFile");
+        public readonly By _tabsDocumentsAddDocumentPopupDescriptionInput = By.Id("txtDescription");
+        public readonly By _tabsDocumentsAddDocumentPopupUploadButton = By.Id("save");
+        public readonly By _tabsDocumentsCheckIfDocumentAdded = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-settlement-documents-overview/div/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[5]");
+        public readonly By _tabsDocumentsOrderByDescription = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/kendo-grid/div/div/div/table/thead/tr/th[5]");
+
+
         public readonly By _tabsNotesAddNewNoteBtn = By.XPath("//*[@id=\"action0\"]");
         public readonly By _clickNoButtonAddCriteriaPopup = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/kendo-dialog/div[2]/kendo-dialog-actions/button[2]");
         public readonly By _startDate = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/kendo-datepicker/span/kendo-dateinput/span/input");
@@ -49,6 +58,21 @@ namespace SpecFlowTest
         public readonly By FirstRowDescription = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/section[2]/div/div/div/div[2]/div[2]/kendo-tabstrip/div/app-package-agreement/div/div[2]/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr/td[5]");
         public readonly By IsPopupCriteriaAppeared = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package-detail/kendo-dialog/div[2]");
 
+
+        private PackageEditorScreenPageObject Waiter(int seconds, By element)
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(seconds));
+            try
+            {
+                wait.Until(d => d.FindElements(element).FirstOrDefault());
+                return new PackageEditorScreenPageObject(_webDriver);
+            }
+            catch
+            {
+                var neededElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+                return new PackageEditorScreenPageObject(_webDriver);
+            }
+        }
 
         public PackageEditorScreenPageObject(IWebDriver webDriver)
         {
@@ -261,6 +285,40 @@ namespace SpecFlowTest
             _webDriver.FindElement(_tabsAgreementsSearchInput).Click();
             actions.SendKeys(description).Perform();
             return new PackageEditorScreenPageObject(_webDriver);
+        }
+
+        public PackageEditorScreenPageObject ChooseDocumentFile()
+        {            
+            IWebElement fileInput = _webDriver.FindElement(_tabsDocumentsAddDocumentPopupChooseFileButton);
+            fileInput.SendKeys("C:/Users/ovly/Downloads/docForTestDoNotDelete.pdf");
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+        public string AddDocumentPopupSetDescription(string description)
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_tabsDocumentsAddDocumentPopupDescriptionInput).Click();
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string result = description + $" {unixTimestamp}";
+            actions.SendKeys(result).Perform();
+            return result;
+        }
+        public PackageEditorScreenPageObject AddDocumentPopupClickUploadButton()
+        {
+            _webDriver.FindElement(_tabsDocumentsAddDocumentPopupUploadButton).Click();
+            return new PackageEditorScreenPageObject(_webDriver);
+        }
+
+        public string IfDocumentAdded()
+        {
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Thread.Sleep(1000);
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Thread.Sleep(1000);
+            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
+            string actualResult = _webDriver.FindElement(_tabsDocumentsCheckIfDocumentAdded).Text;
+            return actualResult;
         }
     }
 }
