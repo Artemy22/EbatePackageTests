@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Dynamitey.DynamicObjects;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -20,6 +21,7 @@ namespace SpecFlowTest.Steps
         private readonly PackagesScreenPageObject packagesScreenPageObject = new PackagesScreenPageObject(driver);
         private readonly PackageEditorScreenPageObject packageEditorScreenPageObject = new PackageEditorScreenPageObject(driver);
         string expectedResult;
+
 
         [Given(@"Chrome is opened")]
         public void GivenChromeIsOpened()
@@ -44,7 +46,6 @@ namespace SpecFlowTest.Steps
             basic.LoginFlow(driver);
             mainMenuPageObject.ClickPricingManagementHeader();
             priceManagmentDropDownPageObject.ClickAgreements();
-            agreementsScreenPageObject.SelectFirstRow();
         }
         
         [Given(@"Navigate to rebate")]
@@ -66,8 +67,7 @@ namespace SpecFlowTest.Steps
             Actions action = new Actions(driver);
             action.SendKeys("1592576148").Perform();
             Thread.Sleep(2000);
-            packagesScreenPageObject.SelectFirstRow();
-            packagesScreenPageObject.ClickActionViewButton();
+            
         }
         
         [Then(@"Add a document to chosen package")]
@@ -83,13 +83,17 @@ namespace SpecFlowTest.Steps
         [Then(@"Choose a agreement")]
         public void ThenChooseAAgreement()
         {
-            ScenarioContext.Current.Pending();
+            agreementsScreenPageObject.FindSeleniumAgreement();
+            agreementsScreenPageObject.SelectFirstRow();
+            packagesScreenPageObject.ClickActionViewButton();
+            agreementEditorPage.ClickTabsDocuments();
+
         }
         
         [Then(@"Add a document to chosen agreement")]
         public void ThenAddADocumentToChosenAgreement()
         {
-            ScenarioContext.Current.Pending();
+            agreementEditorPage.ClickTabsDocumentsUploadtNewDocumentBtn();
         }
         
         [Then(@"Choose a rebate")]
