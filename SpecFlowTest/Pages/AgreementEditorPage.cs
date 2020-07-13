@@ -173,12 +173,14 @@ namespace SpecFlowTest
 
         public AgreementEditorPage ClickTabsDocuments()
         {
+            Thread.Sleep(1000);
             _webDriver.FindElement(TabsDocuments).Click();
             return new AgreementEditorPage(_webDriver);
         }
 
         public AgreementEditorPage ClickTabsDocumentsUploadtNewDocumentBtn()
         {
+            Thread.Sleep(1000);
             _webDriver.FindElement(TabsDocumentsUploadtNewBtn).Click();
             return new AgreementEditorPage(_webDriver);
         }
@@ -288,14 +290,14 @@ namespace SpecFlowTest
 
         public string IfDocumentAdded()
         {
-            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
-            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(TabsRebateFirstRowDescription).Click();
             Thread.Sleep(1000);
-            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
-            _webDriver.FindElement(_tabsDocumentsOrderByDescription).Click();
+            Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+            _webDriver.FindElement(TabsDocumentsOrderByDescription).Click();
             Thread.Sleep(1000);
-            Waiter(10, _tabsDocumentsCheckIfDocumentAdded);
-            string actualResult = _webDriver.FindElement(_tabsDocumentsCheckIfDocumentAdded).Text;
+            Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+            string actualResult = _webDriver.FindElement(TabsDocumentsCheckIfDocumentAdded).Text;
             return actualResult;
         }
     }

@@ -94,12 +94,16 @@ namespace SpecFlowTest.Steps
         public void ThenAddADocumentToChosenAgreement()
         {
             agreementEditorPage.ClickTabsDocumentsUploadtNewDocumentBtn();
+            agreementEditorPage.ChooseDocumentFile();
+            agreementEditorPage.AddDocumentPopupSetDescription("add test document to chosen agreement");
+            agreementEditorPage.ClickTabsDocumentsUploadtNewDocumentBtn();
         }
         
         [Then(@"Choose a rebate")]
         public void ThenChooseARebate()
         {
-            ScenarioContext.Current.Pending();
+
+            //TO DO
         }
         
         [Then(@"Add a document to chosen rebate")]

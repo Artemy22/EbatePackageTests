@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq;
 using System.Threading;
 
 namespace SpecFlowTest
@@ -11,6 +12,8 @@ namespace SpecFlowTest
         
         private IWebDriver _webDriver;
         readonly Random rnd = new Random();
+        private string expectedResult;
+
 
         public readonly By _CustomerType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[1]");
         public readonly By _SupplierType = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/app-company-selection/form/div[1]/div/div/div/fieldset/label[2]");
@@ -22,7 +25,7 @@ namespace SpecFlowTest
         public readonly By _periodInput = By.XPath("//*[@id=\"period\"]");
         public readonly By _startDate = By.XPath("//*[@id=\"periodStart\"]/span");
         public readonly By _endDate = By.XPath("//*[@id=\"periodEnd\"]/span");
-        public readonly By _description = By.XPath("//*[@id=\"description\"]");
+        public readonly By _description = By.Id("description");
         public readonly By _budget = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/div[4]/div[1]/div/kendo-numerictextbox/span");
         public readonly By _target = By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]/div/form/div/div/div[4]/div[2]/div/kendo-numerictextbox/span");
         public readonly By _comments = By.XPath("//*[@id=\"comments\"]");
@@ -278,10 +281,29 @@ namespace SpecFlowTest
             _webDriver.FindElement(_companyNameDropDown).Click();
             actions.SendKeys("art").Perform();
             _webDriver.FindElement(By.XPath("//ul/li[text() = '(NGBUnited Kingdom000014) Artem Inc.']")).Click();
-
             _webDriver.FindElement(_setChosenCompany).Click();
             return new AddPackagePopupPageObject(_webDriver);
         }
+
+        public AddPackagePopupPageObject SetInvoiceAccountRandomCompany()
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(_companyNameDropDown).Click();
+            actions.SendKeys(Keys.Space + Keys.Space).Perform();
+            Thread.Sleep(1000);
+            int intFirst = rnd.Next(1, 20);
+            
+            //TO DO
+
+            for (int i = 0; i <= intFirst; i++)
+            {
+                actions.SendKeys(Keys.ArrowDown).Perform();
+            }
+            actions.SendKeys(Keys.Enter).Perform();
+            _webDriver.FindElement(_setChosenCompany).Click();
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+
         public AddPackagePopupPageObject SetDeliveryAccountCompany()
         {
             Actions actions = new Actions(_webDriver);
@@ -342,5 +364,42 @@ namespace SpecFlowTest
             _webDriver.FindElement(_actualResult);
             return new AddPackagePopupPageObject(_webDriver);
         }
+
+        public bool WaitUntillCopyPopupOpened()
+        {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            try
+            {
+                wait.Until(d => d.FindElements(By.XPath("/html/body/app-home/div/div/div[2]/app-package/app-package/app-package-dialog/kendo-dialog/div[2]")).FirstOrDefault());
+                return true;
+            }
+            catch { return false; }
+        }
+
+        public string getDescription()
+        {
+            expectedResult = _webDriver.FindElement(_description).GetAttribute("value");
+            return expectedResult;
+        }
+        public AddPackagePopupPageObject SetStartDateForCopiedPackage()
+        {
+            Actions actions = new Actions(_webDriver);           
+            _webDriver.FindElement(_startDate).Click();
+            int intFirst = rnd.Next(0, 2);
+            int intSecond = rnd.Next(2, 9);
+
+            actions.SendKeys("20" + intFirst + intSecond).Perform();
+
+            //string startDateBefore = _webDriver.FindElement(_startDate).GetAttribute("aria-valuetext");
+            //var startDateAfter = startDateBefore;
+            //startDateAfter = new string((from c in startDateAfter
+            //                             where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+            //                             select c
+            //       ).ToArray());
+            //int startydDateInt = int.Parse(startDateAfter);
+            //return startydDateInt+1;
+            return new AddPackagePopupPageObject(_webDriver);
+        }
+
     }
 }
