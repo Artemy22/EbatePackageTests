@@ -30,7 +30,13 @@ namespace SpecFlowTest
         public readonly By TabsCriteria = By.Id("k - tabstrip - tab - 2");
         public readonly By TabsAllocation = By.Id("k - tabstrip - tab - 3");
         public readonly By TabsQualifications = By.Id("k - tabstrip - tab - 4");
+
         public readonly By TabsDocuments = By.Id("k - tabstrip - tab - 5");
+        public readonly By TabsDocumentsAddNewButton = By.XPath("//*[@id=\"gridFilesDocuments\"]/div/div[2]/div/div[3]");
+        public readonly By TabsDocumentsPopupChooseDocument = By.Id("txtFile");
+        public readonly By TabsDocumentsSetDescription = By.Id("txtDescription");
+        public readonly By TabsDocumentsPopupUploadButton = By.Id("Save");
+
         public readonly By TabsNotes = By.Id("k - tabstrip - tab - 6");
         public readonly By TabsAudit = By.Id("k - tabstrip - tab - 7");
         public readonly By StartDateInput = By.XPath("//*[@id=\"headingSection\"]/form/div[1]/div[3]/div/kendo-datepicker/span/kendo-dateinput/span");
@@ -68,10 +74,7 @@ namespace SpecFlowTest
         public readonly By TabsRatesProductRebateCheckValueFirstRow = By.XPath("/html/body/app-home/div/div/div[2]/app-rebate-detail/section[2]/div/div/div/div[2]/div[2]/div/kendo-tabstrip/div/app-rebate-detail-rates/div[2]/app-rate-grid/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[9]/div");
 
 
-        //*[@id="k-tabstrip-tabpanel-1"]/app-rebate-detail-rates/div[2]/app-rate-grid/base-grid/div/div[2]/kendo-grid/div/kendo-grid-list/div/div[1]/table/tbody/tr[1]/td[9]/div
-
-        //public readonly By TabsCriteriaAddNewBtnPlusSign = By.Id("btnNew");
-        //public readonly By TabsCriteriaDeleteBtn = By.Id("btnDelete");
+        
 
         public bool Waiter(int seconds, By element)
         {
@@ -220,5 +223,41 @@ namespace SpecFlowTest
                     ).ToArray());
                 return actualResult;
         }
+
+        public RebateEditorPage ChooseDocumentFile()
+        {
+            IWebElement fileInput = _webDriver.FindElement(TabsDocumentsPopupChooseDocument);
+            fileInput.SendKeys("C:/Users/ovly/Downloads/docForTestDoNotDelete.pdf");
+            return new RebateEditorPage(_webDriver);
+        }
+
+        public string AddDocumentPopupSetDescription(string description)
+        {
+            Actions actions = new Actions(_webDriver);
+            _webDriver.FindElement(TabsDocumentsSetDescription).Click();
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string result = description + $" {unixTimestamp}";
+            actions.SendKeys(result).Perform();
+            return result;
+        }
+        public RebateEditorPage AddDocumentPopupClickUploadButton()
+        {
+            _webDriver.FindElement(TabsDocumentsPopupUploadButton).Click();
+            return new RebateEditorPage(_webDriver);
+        }
+
+        //public string IfDocumentAdded()
+        //{
+           // Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+           // _webDriver.FindElement(TabsRebateFirstRowDescription).Click();
+           // Thread.Sleep(1000);
+           // Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+           // _webDriver.FindElement(TabsDocumentsOrderByDescription).Click();
+            //Thread.Sleep(1000);
+            //Waiter(10, TabsDocumentsCheckIfDocumentAdded);
+            //string actualResult = _webDriver.FindElement(TabsDocumentsCheckIfDocumentAdded).Text;
+           // return actualResult;
+        //}
+
     }
 }
